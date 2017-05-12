@@ -34,7 +34,7 @@ header.post-header {
     margin: 40px 0 23px;
 }
 
-header.post-header h6, header.post-header h6 a, div.post-nav, div.post-nav a {
+header.post-header h6, header.post-header h6 a {
     color: #00acdf;
     font-weight: 700;
     text-decoration: none;
@@ -53,11 +53,13 @@ div.post-tags {
     padding: 0;
     list-style: none;
 }
+
 .post-tags ul li {
     display: inline-block;
     margin: 0 .3em .3em 0;
     padding: 0;
 }
+
 .post-tags ul li a {
     display: inline-block;
     max-width: 100px;
@@ -76,10 +78,20 @@ div.post-tags {
     -webkit-transition: .2s;
     transition: .2s;
 }
+
 .post-tags ul li a:hover {
     background-color: #00acdf;
     border: 1px solid #00acdf;
     color: #fff;
+}
+
+.post-tags ul li:first-child {
+    height: 25px;
+    vertical-align: middle;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #818181;
 }
 
 hr.post {
@@ -90,29 +102,51 @@ hr.post {
 div.post-byline {
     height: 50px;
     padding: 0 40px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #818181;
 }
 
 div.post-nav {
-    height: 70px;
-    background-color: #fff;
 }
 
 div.post-nav-container {
-    height: 70px;
-    // border: thin solid #000;
+    height: 160px;
+    margin-bottom: 20px;
+    padding-right: 0;
+    background-color: #fff;
+    border-left: 3px solid #00acdf;
 }
 
-div.post-nav-seperator {
-    height: 70px;
-    background-color: #F4F4F4;
+div.post-nav-head {
+    padding-top: 40px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #818181;
 }
 
-div.post-nav div.text-left {
-    margin: 25px 0;
+div.post-nav-title {
+    padding-top: 15px;
 }
 
-div.post-nav div.text-right {
-    margin: 25px 0;
+div.post-nav-title a {
+    color: #00acdf;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div.post-nav-byline {
+    padding-top: 5px;
+    color: #818181;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+div.post-nav-thumb {
+    padding: 0;
 }
 
 div.footer {
@@ -129,4 +163,5 @@ footer {
     background-color: #000;
 
 }
+
 

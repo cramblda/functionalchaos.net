@@ -35,6 +35,7 @@
         {% if page.tags %}
         <div class="post-tags">
             <ul>
+                <li class="post-tags-label">Tags:</li>
             {% for tag in page.tags %}
                 <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
             {% endfor %}
@@ -43,7 +44,7 @@
         {% endif %}
         <hr class="post">
         <div class="post-byline">
-            <em>By {{ page.author|default('Anonymous') }} On {{ page.date|date('F jS, Y') }}</em>
+            By {{ page.author|default('Anonymous') }} On {{ page.date|date('F jS, Y') }}
         </div>
 
     </article>
@@ -52,21 +53,75 @@
     {% if page.previous_post or page.next_post %}
         <div class="post-nav">
 
+
             {% if page.next_post %}
-            <div class="col-xs-6 post-nav-container">
-                <div class="text-left">
-                    <a class="next" href="{{ site.url }}{{ page.next_post.url }}" title="{{ page.next_post.title }}"><i class="fa fa-angle-left"></i> {{ page.next_post.title }}</a>
+            <div class="col-md-12 post-nav-container">
+                <div class="col-xs-8 post-nav-data">
+                    <div class="row">
+                        <div class="col-xs-12 post-nav-head">Next</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 post-nav-title">
+                            <a class="next" href="{{ site.url }}{{ page.next_post.url }}" title="{{ page.next_post.title }}">
+                                {{ page.next_post.title }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 post-nav-byline">
+                            {{ page.next_post.date|date('F j, Y') }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 post-nav-thumb">
+                    {% if page.next_post.image.url %}
+                        <a href="{{ page.next_post.url }}"><img src="{{
+                            thumbnail(
+                                page.next_post.image.url,
+                                244,
+                                160,
+                                true
+                            ) }}" alt="">
+                        </a>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
 
             {% if page.previous_post %}
-            <div class="col-xs-6 post-nav-container">
-                <div class="text-right">
-                    <a class="previous" href="{{ site.url }}{{ page.previous_post.url }}" title="{{ page.previous_post.title }}">{{ page.previous_post.title }} <i class="fa fa-angle-right"></i></a>
+            <div class="col-md-12 post-nav-container">
+                <div class="col-xs-8 post-nav-data">
+                    <div class="row">
+                        <div class="col-xs-12 post-nav-head">Previous</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 post-nav-title">
+                            <a class="next" href="{{ site.url }}{{ page.previous_post.url }}" title="{{ page.previous_post.title }}">
+                                {{ page.previous_post.title }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 post-nav-byline">
+                            {{ page.previous_post.date|date('F j, Y') }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 post-nav-thumb">
+                    {% if page.previous_post.image.url %}
+                        <a href="{{ page.previous_post.url }}"><img src="{{
+                            thumbnail(
+                                page.previous_post.image.url,
+                                244,
+                                160,
+                                true
+                            ) }}" alt="">
+                        </a>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
+
         </div>
     {% endif %}
 
