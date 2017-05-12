@@ -1,6 +1,6 @@
 functionalchaos.net
 =====================
 
-Static content to build functioanlchaos.net website.
+Static content to build functionalchaos.net website.
 
 Powered by [Sculpin](http://sculpin.io)
