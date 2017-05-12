@@ -8,6 +8,7 @@ You're all programmers, right? And you're writing code snippets on your Sculpin
 powered blog? Yeah. So you want some highlighting with your static site generation?
 Here you go!
 
+~~~php
     namespace Foo;
 
     /**
@@ -27,6 +28,9 @@ Here you go!
             return $this->baz->do('it');
         }
     }
+~~~
+
+---more---
 
 You can also use [fenced code blocks][fcb] with a syntax declaration at the top.
 You can use either `~` or <code>`</code> to mark them.
