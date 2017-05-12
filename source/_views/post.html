@@ -41,9 +41,9 @@
             </ul>
         </div>
         {% endif %}
-        <hr>
-        <div>
-            {{ page.date }}
+        <hr class="post">
+        <div class="post-byline">
+            <em>By {{ page.author|default('Anonymous') }} On {{ page.date|date('F jS, Y') }}</em>
         </div>
 
     </article>

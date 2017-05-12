@@ -45,7 +45,7 @@ div.post-body {
 }
 
 div.post-tags {
-    padding: 40px 20px 20px 20px;
+    padding: 40px 40px 20px 40px;
 }
 
 .post-tags ul {
@@ -80,6 +80,16 @@ div.post-tags {
     background-color: #00acdf;
     border: 1px solid #00acdf;
     color: #fff;
+}
+
+hr.post {
+    margin: 0 40px 20px 40px;
+}
+
+
+div.post-byline {
+    height: 50px;
+    padding: 0 40px;
 }
 
 div.post-nav {
