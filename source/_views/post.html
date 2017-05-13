@@ -30,7 +30,7 @@
             <h1>{{ page.title }}</h1>
         </header>
         <div class="post-body">
-            {{ page.blocks.content|raw }}
+            {{ page.blocks.content|replace({'---more---': ''})|raw }}
         </div>
         {% if page.tags %}
         <div class="post-tags">

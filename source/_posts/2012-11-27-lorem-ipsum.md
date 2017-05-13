@@ -4,7 +4,7 @@ categories:
     - testing
 
 # https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
-disqus: 
+disqus:
     identifier: # slug_for_current_page
     title: # title_for_current_page
     url: # url_for_current_page
@@ -18,6 +18,8 @@ vel leo eros, vitae elementum purus. Integer id lorem hendrerit purus gravida
 commodo. Pellentesque nec rhoncus turpis. Cras feugiat odio eget quam semper at
 dictum lectus adipiscing. In ut est et mauris pulvinar placerat eget fringilla
 lectus.
+
+---more---
 
 Ut in mauris augue, vitae facilisis purus. Nam ullamcorper pharetra lorem,
 cursus lobortis tellus facilisis congue. Etiam ac dapibus lectus. Nunc tempus
