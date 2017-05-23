@@ -20,6 +20,56 @@ nav.navbar {
     min-height: 600px;
 }
 
+div.author-block {
+    margin-bottom: 60px;
+    padding: 30px 20px 20px 20px;
+    background-color: #fff;
+}
+
+div.author-image img {
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+div.author-name {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    padding: 20px 0;
+}
+
+div.author-details {
+    font-family: 'Merriweather', serif;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+div.author-social {
+    padding: 20px 0;
+}
+
+div.author-social i
+{
+    height: 33px;
+    width: 33px;
+    line-height: 33px;
+    font-size: 15px;
+    border-radius: 50%;
+    margin: 3px;
+    border: 1px solid #e5e5e5;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    color: #C2C2C2;
+}
+
+div.author-social i:hover
+{
+    border: 1px solid #00acdf;
+    color: #fff;
+    background-color: #00acdf;
+}
+
 article {
     margin-bottom: 50px;
     background-color: #fff;
