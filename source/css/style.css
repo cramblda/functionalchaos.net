@@ -10,6 +10,10 @@ body {
     background-color: #F4F4F4;
 }
 
+a:hover {
+    color: #00acdf !important;
+}
+
 nav.navbar {
     background-color: #fff;
     padding: 10px 0;
@@ -222,8 +226,15 @@ div.post-nav-thumb {
     padding: 0;
 }
 
+div.instafeed-banner {
+    padding: 20px 0;
+    background-color: #fff;
+    color: #333333;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
 div.footer {
-    margin-top: 30px;
     color: #e2e2e2;
     background-color: #333333;
     padding: 15px 0;

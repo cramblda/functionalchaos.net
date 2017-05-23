@@ -62,7 +62,7 @@
                         <a class="navbar-brand" href="{{ site.url }}/">{{ site.title }}</a>
                     </div>
                     <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav text-uppercase">
                         <li><a href="{{ site.url }}/">Blog</a></li>
                             <li><a href="{{ site.url }}/blog">Posts</a></li>
                             <li><a href="{{ site.url }}/blog/categories">Categories</a></li>
@@ -109,6 +109,17 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="instafeed-banner text-uppercase text-center">
+                Latest from <i class="fa fa-instagram"></i> Instagram
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="instafeed">
+            </div>
+        </div>
+
         <div class="footer">
             <div class="row">
                 <div class="col-md-4"></div>
@@ -124,6 +135,8 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js"></script>
+        <script src="{{ site.url }}/js/instagram-feed.js"></script>
         {% block scripts %}
         {% endblock %}
 
