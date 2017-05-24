@@ -234,6 +234,16 @@ div.instafeed-banner {
     letter-spacing: 0.5px;
 }
 
+div.instafeed-col {
+  padding: 0;
+}
+
+img.instafeed {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
 div.footer {
     color: #e2e2e2;
     background-color: #333333;
@@ -247,5 +257,3 @@ footer {
     background-color: #000;
 
 }
-
-
