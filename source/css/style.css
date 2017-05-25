@@ -10,7 +10,7 @@ body {
     background-color: #F4F4F4;
 }
 
-a:hover {
+nav.navbar a:hover {
     color: #00acdf !important;
 }
 
@@ -24,7 +24,7 @@ nav.navbar {
     min-height: 600px;
 }
 
-div.author-block {
+div.sidebar-block {
     margin-bottom: 60px;
     padding: 30px 20px 20px 20px;
     background-color: #fff;
@@ -125,6 +125,10 @@ div.post-tags {
     padding: 40px 40px 20px 40px;
 }
 
+div.post-tags-widget {
+    padding: 10px;
+}
+
 .post-tags ul {
     margin: 0;
     padding: 0;
@@ -162,7 +166,7 @@ div.post-tags {
     color: #fff;
 }
 
-.post-tags ul li:first-child {
+li.post-tags-label {
     height: 25px;
     vertical-align: middle;
     font-size: 12px;

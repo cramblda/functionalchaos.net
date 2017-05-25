@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{{ page.title }}{% endblock %} &mdash; {{ site.title }} &mdash; {{ site.subtitle }}</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block head_meta %}
+            <meta name="robots" content="noindex, follow">
+        {% endblock %}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ site.url }}/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ site.url }}/images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ site.url }}/images/favicon//apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ site.url }}/images/favicon//apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ site.url }}/images/favicon//apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ site.url }}/images/favicon//apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{ site.url }}/images/favicon//apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ site.url }}/images/favicon//apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{ site.url }}/images/favicon//apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ site.url }}/images/favicon//apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{{ site.url }}/images/favicon//android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ site.url }}/images/favicon//favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ site.url }}/images/favicon//favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ site.url }}/images/favicon//favicon-16x16.png">
+        <link rel="manifest" href="{{ site.url }}/images/favicon//manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{{ site.url }}/images/favicon//ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="{{ site.url }}/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="{{ site.url }}/atom.xml" title="{{ site.title }} activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+        {% block head_styles %}
+        {% endblock head_styles%}
+        {% block head_scripts %}
+        {% endblock head_scripts%}
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ site.url }}/">{{ site.title }}</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav text-uppercase">
+                        <li><a href="{{ site.url }}/">Blog</a></li>
+                            <li><a href="{{ site.url }}/blog">Posts</a></li>
+                            <li><a href="{{ site.url }}/blog/categories">Categories</a></li>
+                            <li><a href="{{ site.url }}/about">About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="mainContent container">
+            <div class="row">
+
+                <div class="col-md-8">
+                    {% block content_wrapper %}
+                        {% block content %}
+                        {% endblock content%}
+                    {% endblock content_wrapper%}
+                </div>
+
+
+                <div class="col-md-4">
+                    {% block sidebar %}
+                    {% endblock sidebar %}
+                </div>
+
+            </div>
+        </div>
+
+        {% block pre_footer %}
+        {% endblock pre_footer %}
+
+        <div class="footer">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+        <footer>
+            <div class="row text-center">
+                &copy; {{ "now"|date("Y") }} {{ site.title }}
+            </div>
+        </footer>
+
+        {% block scripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock scripts%}
+
+        {% if site.google_analytics_tracking_id %}
+            <script type="text/javascript">
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', '{{site.google_analytics_tracking_id}}', 'auto');
+                ga('send', 'pageview');
+            </script>
+        {% endif %}
+
+        {% block scripts_after %}
+        {% endblock scripts_after%}
+    </body>
+</html>
