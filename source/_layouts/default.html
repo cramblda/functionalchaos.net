@@ -76,39 +76,46 @@
 
         <div class="mainContent container">
             <div class="row">
+
+                <!-- Blog/Main Content Start -->
                 <div class="col-md-8">
                     {% block content_wrapper %}{% block content %}{% endblock content%}{% endblock content_wrapper%}
                 </div>
+                <!-- Blog/Main Content End -->
+
+                <!-- Sidebar Start -->
                 <div class="col-md-4">
                     <div class="author-block text-center">
-                        <diV class="author-image">
+                        <div class="author-image">
                             <img src="https://www.gravatar.com/avatar/62d2260838ef63a940158474f2e6c65f?s=200">
-                        </diV>
-                        <diV class="author-name text-uppercase">
+                        </div>
+                        <div class="author-name text-uppercase">
                             David Cramblett
                         </div>
-                        <diV class="author-details">
+                        <div class="author-details">
                             Avid outdoor adventurer and technology professional. Currently working as
                             a systems administrator and web app developer.
                         </div>
-                        <diV class="author-social">
+                        <div class="author-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-google-plus"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
-                    <div class="well sidebar-nav">
-                        <h4>Links</h4>
-                        <ul class="nav">
-                            <li><a href="http://sculpin.io">sculpin.io</a></li>
-                            <li><a href="http://twitter.com/getsculpin">@getsculpin</a></li>
-                        </ul>
+
+                    <div class="">
+                        <a class="twitter-timeline" href="https://twitter.com/FunctionalChaos">Tweets by FunctionalChaos</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
+
                 </div>
+                <!-- Sidebar End -->
+
             </div>
         </div>
 
+        <!-- Instagram feed Start -->
         <div class="row">
             <div class="instafeed-banner text-uppercase text-center">
                 Latest from <i class="fa fa-instagram"></i> Instagram
@@ -119,6 +126,7 @@
             <div id="instafeed">
             </div>
         </div>
+        <!-- Instagram feed End -->
 
         <div class="footer">
             <div class="row">
