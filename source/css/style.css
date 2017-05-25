@@ -30,6 +30,10 @@ div.sidebar-block {
     background-color: #fff;
 }
 
+div.sidebar-block-condensed {
+    padding: 15px 10px 10px 15px;
+}
+
 div.author-image img {
     border-radius: 50%;
     -moz-border-radius: 50%;
@@ -231,6 +235,7 @@ div.post-nav-thumb {
 }
 
 div.instafeed-banner {
+    margin-top: 30px;
     padding: 20px 0;
     background-color: #fff;
     color: #333333;
