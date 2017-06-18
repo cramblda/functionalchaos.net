@@ -5,11 +5,8 @@ generator: pagination
 pagination:
     max_per_page: 3
 use:
-    - posts
     - posts_tags
 ---
-
-{% block content_wrapper %}
 
     {% for post in page.pagination.items %}
 
@@ -69,21 +66,3 @@ use:
             {% if page.pagination.next_page %}<a href="{{ site.url }}{{ page.pagination.next_page.url }}">Older Posts</a>{% endif %}<br />
         </nav>
     {% endif %}
-
-{% endblock content_wrapper %}
-
-
-{% block sidebar_tag_widget %}
-
-    <div class="sidebar-block sidebar-block-condensed">
-        <h3 class="text-center">Tag Cloud</h3>
-        <div class="post-tags post-tags-widget">
-            <ul>
-            {% for tag,posts in data.posts_tags %}
-                <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
-            {% endfor %}
-            </ul>
-        </div>
-    </div>
-
-{% endblock sidebar_tag_widget %}

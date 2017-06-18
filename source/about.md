@@ -1,6 +1,8 @@
 ---
 layout: default
 title: About
+use:
+    - posts_tags
 
 ---
 # About the Author or Blog
