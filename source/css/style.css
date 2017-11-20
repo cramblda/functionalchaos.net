@@ -19,6 +19,15 @@ nav.navbar {
     padding: 10px 0;
 }
 
+nav.post-nav {
+    margin-bottom: 50px;
+}
+
+nav.post-nav a, nav.post-nav a:hover {
+    color: #00acdf;
+    text-decoration: none;
+}
+
 .mainContent, footer.container {
     max-width: 1200px;
     min-height: 600px;
@@ -237,8 +246,11 @@ div.disqus-block {
     padding: 10px;
 }
 
+div.twitter-feed {
+    margin-bottom: 30px;    
+}
+
 div.instafeed-banner {
-    margin-top: 30px;
     padding: 20px 0;
     background-color: #fff;
     color: #333333;
