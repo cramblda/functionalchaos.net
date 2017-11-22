@@ -4,13 +4,10 @@ title: Category Archive
 generator: [posts_category_index, pagination]
 pagination:
     provider: page.category_posts
+use:
+    - post_tags
 
 ---
-
-{% block head_meta %}
-    <link rel="alternate" type="application/atom+xml" href="{{ site.url }}/blog/categories/{{ page.category|url_encode(true) }}.xml" title="{{ site.title }} '{{ page.category }}' category feed" />
-    <meta name="robots" content="noindex, follow">
-{% endblock %}
 
 {% block title %}{{ page.title }} "{{ page.category }}"{% endblock %}
 {% block content %}

@@ -25,18 +25,6 @@
     </div>
     {% endblock sidebar_author %}
 
-    {% block sidebar_tag_widget %}
-        <div class="sidebar-block sidebar-block-condensed">
-            <h3 class="text-center">Tag Cloud</h3>
-            <div class="post-tags post-tags-widget">
-                <ul>
-                {% for tag,posts in data.posts_tags %}
-                    <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
-                {% endfor %}
-                </ul>
-            </div>
-        </div>
-    {% endblock sidebar_tag_widget %}
 
     {% block sidebar_twitter_widget %}
     <div class="twitter-feed">
@@ -62,6 +50,24 @@
         </div>
     {% endblock instagram_feed %}
 {% endblock pre_footer %}
+
+{% block footer_left %}
+    <h3 class="widget-title text-left">Author</h3>
+    <div class="">
+
+    </div>
+ {% endblock footer_left %}
+
+{% block footer_middle %}
+    <h3 class="widget-title text-left">Tags</h3>
+    <div class="post-tags post-tags-widget">
+        <ul>
+        {% for tag,posts in data.posts_tags %}
+            <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock footer_middle %}
 
 
 {% block scripts %}

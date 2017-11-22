@@ -160,13 +160,12 @@ div.post-tags-widget {
     height: 28px;
     line-height: 28px;
     padding: 0 1em;
-    background-color: #fff;
-    border: 1px solid #aaa;
+    border: 1px solid #00acdf;
     border-radius: 3px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: #333;
+    color: #00acdf;
     font-size: 13px;
     text-decoration: none;
     -webkit-transition: .2s;
@@ -191,7 +190,6 @@ li.post-tags-label {
 hr.post {
     margin: 0 40px 20px 40px;
 }
-
 
 div.post-byline {
     height: 50px;
@@ -247,7 +245,7 @@ div.disqus-block {
 }
 
 div.twitter-feed {
-    margin-bottom: 30px;    
+    margin-bottom: 30px;
 }
 
 div.instafeed-banner {
@@ -268,10 +266,14 @@ img.instafeed {
     margin: auto;
 }
 
+div.instafeed-landscape img{
+    max-width: 178.3%;
+}
+
 div.footer {
     color: #e2e2e2;
     background-color: #333333;
-    padding: 15px 0;
+    padding: 15px 50px;
     min-height: 400px;
 }
 
@@ -280,4 +282,14 @@ footer {
     color: #e2e2e2;
     background-color: #000;
 
+}
+
+.widget-title {
+    margin-left: 10px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: "Open Sans";
 }

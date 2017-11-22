@@ -6,6 +6,6 @@ var userFeed = new Instafeed({
     resolution: 'standard_resolution',
     limit: 6,
     sortBy: 'most-recent',
-    template: '<div class="col-xs-4 col-md-2 instafeed-col"><a href="{{link}}" target="_blank"><img class="instafeed" src="{{image}}" /></a></div>'
+    template: '<div class="col-xs-4 col-md-2 instafeed-col instafeed-{{orientation}}"><a href="{{link}}" target="_blank"><img class="instafeed" src="{{image}}" /></a></div>'
 });
 userFeed.run();
