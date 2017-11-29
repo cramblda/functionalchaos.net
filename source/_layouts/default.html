@@ -8,7 +8,7 @@
         <div class="author-image">
             <img src="https://www.gravatar.com/avatar/62d2260838ef63a940158474f2e6c65f?s=200">
         </div>
-        <div class="author-name text-uppercase">
+        <div class="title-block text-uppercase">
             David Cramblett
         </div>
         <div class="author-details">
@@ -27,7 +27,7 @@
 
     {% block sidebar_category_widget %}
         <div class="sidebar-block sidebar-block-condensed">
-            <h3 class="text-center">Categories</h3>
+            <div class="title-block text-center text-uppercase">Categories</div>
             <div class="post-category post-category-widget">
                 <ul>
                 {% for category,posts in data.posts_categories %}
@@ -64,12 +64,14 @@
     {% endblock instagram_feed %}
 {% endblock pre_footer %}
 
+
 {% block footer_left %}
     <h3 class="widget-title text-left">Author</h3>
     <div class="">
 
     </div>
  {% endblock footer_left %}
+
 
 {% block footer_middle %}
     <h3 class="widget-title text-left">Tags</h3>
@@ -81,6 +83,14 @@
         </ul>
     </div>
 {% endblock footer_middle %}
+
+
+{% block footer_right %}
+    <h3 class="widget-title text-left">Archived Pages</h3>
+    <div class="">
+
+    </div>
+ {% endblock footer_right %}
 
 
 {% block scripts %}
