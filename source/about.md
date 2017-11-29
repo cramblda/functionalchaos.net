@@ -2,6 +2,7 @@
 layout: default
 title: About
 use:
+    - posts_categories
     - posts_tags
 
 ---

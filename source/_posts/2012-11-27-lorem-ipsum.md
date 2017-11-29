@@ -2,6 +2,9 @@
 title: Lorem Ipsum
 categories:
     - testing
+use:
+    - posts_categories
+    - posts_tags
 
 # https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
 disqus:

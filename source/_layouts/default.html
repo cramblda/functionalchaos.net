@@ -27,11 +27,11 @@
 
     {% block sidebar_category_widget %}
         <div class="sidebar-block sidebar-block-condensed">
-            <h3 class="text-center">Category</h3>
-            <div class="post-tags post-tags-widget">
+            <h3 class="text-center">Categories</h3>
+            <div class="post-category post-category-widget">
                 <ul>
-                {% for tag,posts in data.posts_tags %}
-                    <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
+                {% for category,posts in data.posts_categories %}
+                    <li><a href="{{ site.url }}/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a></li>
                 {% endfor %}
                 </ul>
             </div>

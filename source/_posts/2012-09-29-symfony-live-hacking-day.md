@@ -2,6 +2,9 @@
 title: Symfony Live Hacking Day!
 tags: [sensio, symfony, symfony live]
 categories: [personal]
+use:
+    - posts_categories
+    - posts_tags
 
 ---
 Fun times at the Symfony Live San Francisco 2012 Hacking Day! Code

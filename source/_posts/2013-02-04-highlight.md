@@ -2,6 +2,9 @@
 title: Syntax Highlighting
 categories:
     - features
+use:
+    - posts_categories
+    - posts_tags
 
 ---
 You're all programmers, right? And you're writing code snippets on your Sculpin
