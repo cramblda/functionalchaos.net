@@ -92,6 +92,15 @@ div.author-social i:hover
     background-color: #00acdf;
 }
 
+div.content-header {
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 26px;
+}
+
 article {
     margin-bottom: 50px;
     background-color: #fff;

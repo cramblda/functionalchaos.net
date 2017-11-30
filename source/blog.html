@@ -47,15 +47,19 @@ use:
 {% endfor %}
 </div>
 
-<div>
 {% if page.pagination.previous_page or page.pagination.next_page %}
-    <nav class="article clearfix">
-        {% if page.pagination.previous_page %}
-            <a class="previous" href="{{ site.url }}{{ page.pagination.previous_page.url }}" title="Previous Page"><span class="title">Previous Page</span></a>
-        {% endif %}
-        {% if page.pagination.next_page %}
-            <a class="next" href="{{ site.url }}{{ page.pagination.next_page.url }}" title="Next Page"><span class="title">Next Page</span></a>
-        {% endif %}
+    <nav class="post-nav">
+        <div class="row">
+            <div class="col-xs-6 text-left">
+                {% if page.pagination.previous_page %}
+                    <a class="btn btn-default" href="{{ site.url }}{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>
+                {% endif %}
+            </div>
+            <div class="col-xs-6 text-right">
+                {% if page.pagination.next_page %}
+                    <a class="btn btn-default" href="{{ site.url }}{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
     </nav>
 {% endif %}
-</div>

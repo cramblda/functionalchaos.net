@@ -1,6 +1,6 @@
 ---
 title: Symfony Live Hacking Day!
-tags: [sensio, symfony, symfony live]
+tags: [sensio, symfony, symfony live, tech]
 categories: [personal]
 use:
     - posts_categories

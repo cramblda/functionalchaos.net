@@ -11,40 +11,73 @@ use:
 ---
 
 {% block head_meta %}
-    <link rel="alternate" type="application/atom+xml" href="{{ site.url }}/blog/tags/{{ page.tag|url_encode(true) }}.xml" title="{{ site.title }} '{{ page.tag }}' tag feed" />
     <meta name="robots" content="noindex, follow">
 {% endblock %}
 
 {% block title %}{{ page.title }} "{{ page.tag }}"{% endblock %}
-{% block content %}
-{% set year = '0' %}
-<h2>"{{ page.tag }}"</h2>
-{% for post in page.pagination.items %}
-{% set this_year %}{{ post.date | date("Y") }}{% endset %}
-{% if year != this_year %}
-  {% set month = '0' %}
-  {% set year = this_year %}
-{% endif %}
-{% set this_month %}{{ post.date | date("F") }}{% endset %}
-{% if month != this_month %}
-  {% set month = this_month %}
-  <h3>{{ month }} {{ year }}</h3>
-{% endif %}
-<article>
-  <div><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></div>
-</article>
-{% endfor %}
 
-<div>
-{% if page.pagination.previous_page or page.pagination.next_page %}
-    <nav class="article clearfix">
-    {% if page.pagination.previous_page %}
-    <a class="previous" href="{{ site.url }}{{ page.pagination.previous_page.url }}" title="Previous Page"><span class="title">Previous Page</span></a>
-    {% endif %}
-    {% if page.pagination.next_page %}
-    <a class="next" href="{{ site.url }}{{ page.pagination.next_page.url }}" title="Next Page"><span class="title">Next Page</span></a>
-    {% endif %}
-    </nav>
-{% endif %}
-</div>
+{% block content %}
+
+  <div class="content-header">
+    Browsing tag <span class="text-capitalize"><strong><em>{{ page.tag }}</em></strong></span>
+  </div>
+
+  <div class="post-nav">
+  {% for post in page.pagination.items %}
+
+      <div class="col-md-12 post-nav-container">
+          <div class="col-xs-8 post-nav-data">
+              <div class="row">
+                  <div class="col-xs-12 post-nav-head">
+                      {% for category in post.categories %}
+                          {{ category }}{% if not loop.last %} &nbsp; / &nbsp; {% endif %}
+                      {% endfor %}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 post-nav-title">
+                      <a class="next" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">
+                          {{ post.title }}
+                      </a>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 post-nav-byline">
+                      {{ post.date|date('F j, Y') }}
+                  </div>
+              </div>
+          </div>
+          <div class="col-xs-4 post-nav-thumb">
+              {% if post.image.url %}
+                  <a href="{{ post.url }}"><img src="{{
+                      thumbnail(
+                          post.image.url,
+                          244,
+                          160,
+                          true
+                      ) }}" alt="">
+                  </a>
+              {% endif %}
+          </div>
+      </div>
+  {% endfor %}
+  </div>
+
+  {% if page.pagination.previous_page or page.pagination.next_page %}
+      <nav class="post-nav">
+          <div class="row">
+              <div class="col-xs-6 text-left">
+                  {% if page.pagination.previous_page %}
+                      <a class="btn btn-default" href="{{ site.url }}{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>
+                  {% endif %}
+              </div>
+              <div class="col-xs-6 text-right">
+                  {% if page.pagination.next_page %}
+                      <a class="btn btn-default" href="{{ site.url }}{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>
+                  {% endif %}
+              </div>
+          </div>
+      </nav>
+  {% endif %}
+
 {% endblock content %}
