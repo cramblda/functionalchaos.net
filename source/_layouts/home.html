@@ -1,0 +1,20 @@
+{% extends "default" %}
+
+
+{% block sidebar_widget_container %}
+
+    {% block sidebar_twitter_widget %}
+    <div class="twitter-feed sidebar-block">
+        <a
+            class="twitter-timeline"
+            data-tweet-limit="4"
+            data-theme="light"
+            data-link-color="#00acdf"
+            href="https://twitter.com/FunctionalChaos?ref_src=twsrc%5Etfw">
+          Tweets by FunctionalChaos
+        </a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    {% endblock sidebar_twitter_widget %}
+
+{% endblock sidebar_widget_container %}
