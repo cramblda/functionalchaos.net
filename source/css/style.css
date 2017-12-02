@@ -238,11 +238,40 @@ hr.post {
 
 div.post-byline {
     height: 50px;
+    margin-top: 15px;
     padding: 0 40px;
     font-size: 12px;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #818181;
+}
+
+div.post-share {
+    height: 50px;
+    padding: 0 40px;
+    color: #818181;
+}
+
+div.post-share i
+{
+    height: 33px;
+    width: 33px;
+    line-height: 33px;
+    font-size: 15px;
+    border-radius: 50%;
+    margin: 3px;
+    border: 1px solid #e5e5e5;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    color: #C2C2C2;
+    text-align: center;
+}
+
+div.post-share i:hover
+{
+    border: 1px solid #00acdf;
+    color: #fff;
+    background-color: #00acdf;
 }
 
 div.post-nav-container {
