@@ -2,7 +2,15 @@
 
 {% block content_wrapper %}
     <article>
-        <div class="post-image">&nbsp;</div>
+        <div class="post-image">
+            <img src="{{
+                    thumbnail(
+                        'images/site/mthood-2017.JPG',
+                        750,
+                        560,
+                        true
+                    ) }}" alt="">
+        </div>
         <header class="post-header text-center">
             <h1>{{ page.title }}</h1>
         </header>

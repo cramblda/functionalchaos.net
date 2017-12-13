@@ -8,7 +8,7 @@ use:
 
 Hello, I'm David. I'm a systems administrator and software developer in the
 Portland Metro area. I prefer open source platforms and tools, like Linux
-and PHP, but I get along with most everything. I teach information
+and PHP, but I get along with most everything. Additionally, I teach information
 technology classes part-time at Mt Hood Community College in the evenings and
 on-line.
 
