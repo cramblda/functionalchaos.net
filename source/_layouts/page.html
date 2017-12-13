@@ -1,0 +1,15 @@
+{% extends "default" %}
+
+{% block content_wrapper %}
+    <article>
+        <div class="post-image">&nbsp;</div>
+        <header class="post-header text-center">
+            <h1>{{ page.title }}</h1>
+        </header>
+        <div class="post-body">
+            {% block content %}
+
+            {% endblock content%}
+        </div>
+    </article>
+{% endblock content_wrapper%}
