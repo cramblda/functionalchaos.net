@@ -10,7 +10,7 @@ use:
 <div class="post-nav">
 {% for post in page.pagination.items %}
     <div class="col-md-12 post-nav-container">
-        <div class="col-xs-8 post-nav-data">
+        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12 post-nav-data">
             <div class="row">
                 <div class="col-xs-12 post-nav-head">
                     {% for category in post.categories %}
@@ -31,12 +31,12 @@ use:
                 </div>
             </div>
         </div>
-        <div class="col-xs-4 post-nav-thumb">
+        <div class="col-lg-4 col-md-5 col-sm-5 hidden-xs post-nav-thumb">
             {% if post.image.url %}
-                <a href="{{ post.url }}"><img src="{{
+                <a href="{{ post.url }}"><img class="pull-right" src="{{
                     thumbnail(
                         post.image.url,
-                        244,
+                        240,
                         160,
                         true
                     ) }}" alt="">
