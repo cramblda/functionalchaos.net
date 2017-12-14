@@ -33,6 +33,10 @@ nav.post-nav a, nav.post-nav a:hover {
     text-decoration: none;
 }
 
+div.row {
+    margin: 0;
+}
+
 .mainContent, footer.container {
     max-width: 1200px;
     min-height: 600px;
