@@ -52,10 +52,10 @@
         {% endif %}
         <hr class="post">
         <div class="row">
-            <div class="col-xs-6 post-byline">
+            <div class="col-sm-6 post-byline text-xs-center">
                 By {{ page.author|default('Anonymous') }} On {{ page.date|date('F jS, Y') }}
             </div>
-            <div class="col-xs-6 post-share text-right">
+            <div class="col-sm-6 post-share text-right text-xs-center">
                 <a id="fbShare"><i class="fa fa-facebook"></i></a>
                 <a href="https://twitter.com/FunctionalChaos" target="_blank"><i class="fa fa-twitter"></i></a>
                 <a href="https://plus.google.com/+DavidCramblett" target="_blank"><i class="fa fa-google-plus"></i></a>
@@ -102,7 +102,7 @@
 
             {% if page.next_post %}
             <div class="col-md-12 post-nav-container">
-                <div class="col-xs-8 post-nav-data">
+                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12 post-nav-data">
                     <div class="row">
                         <div class="col-xs-12 post-nav-head">Next</div>
                     </div>
@@ -119,9 +119,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-4 post-nav-thumb">
+                <div class="col-lg-4 col-md-5 col-sm-5 hidden-xs post-nav-thumb">
                     {% if page.next_post.image.url %}
-                        <a href="{{ page.next_post.url }}"><img src="{{
+                        <a href="{{ page.next_post.url }}"><img class="pull-right" src="{{
                             thumbnail(
                                 page.next_post.image.url,
                                 244,
@@ -136,7 +136,7 @@
 
             {% if page.previous_post %}
             <div class="col-md-12 post-nav-container">
-                <div class="col-xs-8 post-nav-data">
+                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12 post-nav-data">
                     <div class="row">
                         <div class="col-xs-12 post-nav-head">Previous</div>
                     </div>
@@ -153,9 +153,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-4 post-nav-thumb">
+                <div class="col-lg-4 col-md-5 col-sm-5 hidden-xs post-nav-thumb">
                     {% if page.previous_post.image.url %}
-                        <a href="{{ page.previous_post.url }}"><img src="{{
+                        <a href="{{ page.previous_post.url }}"><img class="pull-right" src="{{
                             thumbnail(
                                 page.previous_post.image.url,
                                 244,

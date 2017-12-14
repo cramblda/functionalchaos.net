@@ -398,3 +398,10 @@ div.footer-archive a {
 div.footer-archive i {
     padding-right: 3px;
 }
+
+
+@media (max-width: 767px) {
+      .text-xs-center {
+              text-align: center;
+       }
+    }
