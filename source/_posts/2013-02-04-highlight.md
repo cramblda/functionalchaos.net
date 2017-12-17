@@ -1,7 +1,10 @@
 ---
-title: Syntax Highlighting
+title: Syntax Highlighting - draft
+draft: true
 categories:
-    - features
+    - technology
+tags:
+    - tech
 use:
     - posts_categories
     - posts_tags
