@@ -16,24 +16,20 @@
         }
     ],
     "require": {
-	  "sculpin/sculpin": "^2.1@dev",
-	  "dflydev/embedded-composer": "^1.0@dev",
-      "kriswallsmith/assetic": "1.1.2",
-      "components/highlightjs": "^9.7",
-        "beryllium/icelus": "^1.0"
-    },
-    "config": {
-        "component-dir": "source/components",
-        "components": [
-            "components/highlightjs"
-        ]
+	  "sculpin/sculpin": "~3.0",
+        "beryllium/icelus": "^1.1"
     },
     "scripts": {
-        "post-install-cmd": [
-            "ComponentManager\\ComponentManager::postComposerInstall"
+        "publish": [
+            "./publish.sh"
+        ],
+        "sculpin-watch": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor/bin/sculpin generate --watch --server"
+        ],
+        "yarn-watch": [
+            "Composer\\Config::disableProcessTimeout",
+            "yarn encore dev --watch"
         ]
-    },
-    "autoload": {
-        "classmap": ["component-manager.php"]
     }
 }
