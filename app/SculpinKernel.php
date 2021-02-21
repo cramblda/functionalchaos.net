@@ -2,10 +2,10 @@
 
 class SculpinKernel extends \Sculpin\Bundle\SculpinBundle\HttpKernel\AbstractKernel
 {
-    protected function getAdditionalSculpinBundles()
+    protected function getAdditionalSculpinBundles(): array
     {
-        return array(
-            'Beryllium\Icelus\IcelusBundle',
-        );
+        return [
+          'Beryllium\Icelus\IcelusBundle',
+        ];
     }
 }
