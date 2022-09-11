@@ -31,5 +31,10 @@
             "Composer\\Config::disableProcessTimeout",
             "yarn encore dev --watch"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "sculpin/sculpin-theme-composer-plugin": true
+        }
     }
 }
