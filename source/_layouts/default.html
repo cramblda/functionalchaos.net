@@ -6,7 +6,7 @@
     {% block sidebar_author %}
     <div class="sidebar-block text-center">
         <div class="author-image">
-            <img src="https://www.gravatar.com/avatar/62d2260838ef63a940158474f2e6c65f?s=200">
+            <img src="/images/site/david-cramblett.jpg" width="200" height="200" alt="David Cramblett">
         </div>
         <div class="title-block text-uppercase">
             David Cramblett
@@ -17,7 +17,8 @@
         </div>
         <div class="author-social">
             <a href="https://www.facebook.com/david.cramblett" target="_blank"><i class="fa fa-facebook"></i></a>
-            <a href="https://twitter.com/FunctionalChaos" target="_blank"><i class="fa fa-twitter"></i></a>
+            {# Font Awesome 4.7 has no X logo, so this is an inline SVG (Simple Icons, CC0) until FA is upgraded. #}
+            <a href="https://x.com/FunctionalChaos" target="_blank" aria-label="X"><i class="fa fa-x-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></i></a>
             <a href="https://www.instagram.com/david.cramblett" target="_blank"><i class="fa fa-instagram"></i></a>
             <a href="https://github.com/cramblda" target="_blank"><i class="fa fa-github"></i></a>
             <a href="https://www.linkedin.com/in/david-m-cramblett" target="_blank"><i class="fa fa-linkedin"></i></a>
@@ -46,16 +47,21 @@
 
 {% block pre_footer %}
     {% block instagram_feed %}
-        <div class="row">
-            <div class="instafeed-banner text-uppercase text-center">
-                Latest from <i class="fa fa-instagram"></i> Instagram
+    {% if site.instagram.token_url %}
+        {# Hidden until photos render (js/instagram-feed.js), so a dead token doesn't leave an empty banner. #}
+        <div id="instagram-section" style="display: none;">
+            <div class="row">
+                <div class="instafeed-banner text-uppercase text-center">
+                    Latest from <i class="fa fa-instagram"></i> Instagram
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div id="instafeed">
+            <div class="row">
+                <div id="instafeed">
+                </div>
             </div>
         </div>
+    {% endif %}
     {% endblock instagram_feed %}
 {% endblock pre_footer %}
 
@@ -98,6 +104,9 @@
     {{ parent() }}
     <script src="/components/highlightjs/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/instafeed.min.js"></script>
-    <script src="/js/instagram-feed.js"></script>
+    {% if site.instagram.token_url %}
+        <script src="{{ site.instagram.token_url }}"></script>
+        <script src="/js/instafeed.min.js"></script>
+        <script src="/js/instagram-feed.js"></script>
+    {% endif %}
 {% endblock scripts%}

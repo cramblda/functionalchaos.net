@@ -133,8 +133,9 @@ spec:
     - name: fc-prod-nginx
       port: 80
 ---
-# www record in Cloudflare: DNS-only CNAME to the apex, created and owned by ExternalDNS (the apex A record
-# is maintained by pfSense DDNS). Internally, www comes from the BIND zone on `files` (A → gateway), since
+# www record in Cloudflare: CNAME to the apex, PROXIED through Cloudflare, created and owned by ExternalDNS
+# (the apex A record is maintained by pfSense DDNS). Proxied records always get Cloudflare's automatic TTL.
+# Internally, www comes from the BIND zone on `files` (A → gateway), since
 # functionalchaos.net is authoritative there.
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
@@ -147,4 +148,6 @@ spec:
     recordType: CNAME
     targets:
     - functionalchaos.net
-    recordTTL: 300
+    providerSpecific:
+    - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+      value: "true"

@@ -1,9 +1,7 @@
 /.sculpin/
 /app/cache/*
-/app/config/sculpin_kernel*.yml
-/app/config/sculpin_site*.yml
 /app/logs/*
 /output_*/
 #/source/components/
-s3.conf
 /vendor
+/.memsearch/

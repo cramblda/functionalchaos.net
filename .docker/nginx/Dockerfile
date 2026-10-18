@@ -3,19 +3,19 @@
 # Content that is NOT in git (photos/, pe7700/, ~6.4 GB) is not baked in. It lives on a Longhorn
 # volume mounted at /srv/content (see .k8s/fc-prod-nginx-deployment.yaml and README.md).
 
-FROM php:8.3-cli-alpine AS builder
+FROM php:8.5-cli-alpine AS builder
 
-# GD is required by Imanee, which Sculpin uses to generate the _thumbs images.
-RUN apk add --no-cache git unzip libpng libjpeg-turbo freetype \
- && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS libpng-dev libjpeg-turbo-dev freetype-dev \
- && docker-php-ext-configure gd --with-jpeg --with-freetype \
- && docker-php-ext-install gd \
+# Icelus (the thumbnail() Twig function that generates _thumbs/) uses Imagick when it's loaded, otherwise GD.
+# Use Imagick: Icelus 4.0.0-alpha2's GD path leaves black bars on cropped thumbnails and mis-sizes fitted ones.
+RUN apk add --no-cache git unzip imagemagick imagemagick-jpeg \
+ && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS imagemagick-dev \
+ && pecl install imagick \
+ && docker-php-ext-enable imagick \
  && apk del .build-deps \
  && curl -sS https://getcomposer.org/installer \
     | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /build
-# app/config/sculpin_site.yml is gitignored but required: it comes from the local working copy.
 COPY . .
 RUN composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
 RUN vendor/bin/sculpin generate --env=prod

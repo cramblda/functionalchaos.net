@@ -26,9 +26,6 @@ Served from the FC home Kubernetes cluster as an unprivileged nginx image built 
 Prerequisites: `docker login registry.functionalchaos.net`. The cluster repo (`~/projects/fc-k8s-cluster`)
 owns the `harbor-pull-secret` pull secret, and the Gateway listeners and certificate.
 
-Note: `app/config/sculpin_site.yml` and `sculpin_kernel.yml` are gitignored but the build needs them,
-so a fresh clone can't build until they're restored.
-
 ### Content not in git
 
 `photos/` (~6.4 GB, including an old PHP gallery whose `.php` pages are not served) and `pe7700/` live on

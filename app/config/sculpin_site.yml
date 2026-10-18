@@ -1,0 +1,18 @@
+# The contents of this file are parsed and made available as
+# via `site.*`. So for example, {{ site.title }} can be used
+# in a template to get the contents of the `title` key.
+title: functionalchaos.net
+subtitle:
+url: https://functionalchaos.net
+
+# Insert your disqus shortname
+disqus:
+    shortname: functionalchaos-net
+
+facebook:
+    appid: 431997004737458
+
+# Instagram feed (footer). token_url is the token.js script from the Instant Tokens dashboard. The userSecret in it
+# is public by design: it ends up in every page's HTML. Remove token_url to turn the feed off.
+instagram:
+    token_url: https://ig.instant-tokens.com/users/d444bf57-75d1-467a-9c2e-87e558b0e8a3/instagram/29540278508954056/token.js?userSecret=xgiyg5ggs1cnrv17rn4m9f
