@@ -9,7 +9,7 @@
   const userFeed = new Instafeed({
     accessToken: InstagramToken,
     limit: 6,
-    template: '<div class="col-xs-4 col-md-2 instafeed-col"><a href="{{link}}" target="_blank"><img class="instafeed" src="{{image}}" /></a></div>',
+    template: '<div class="col-4 col-lg-2 instafeed-col"><a href="{{link}}" target="_blank"><img class="instafeed" src="{{image}}" /></a></div>',
     after: function () {
       if (document.getElementById('instafeed').children.length) {
         document.getElementById('instagram-section').style.display = '';

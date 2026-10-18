@@ -12,9 +12,6 @@
 
 ## Backlog
 
-### Outdated
-- [ ] Update front-end libraries (Bootstrap 3, jQuery 3.2.1, Font Awesome 4, highlight.js) without changing the look. With Font Awesome 6, switch the inline X logo to its built-in X icon
-
 ### Content
 - [ ] Refresh bio text (About page, sidebar, footer)
 - [ ] Review social links
@@ -52,3 +49,5 @@
 - [x] Mt Hood header image and the sample drafts checked: intentional, keeping them
 - [x] Docker build uses Pacific time, so production dates match local builds
 - [x] Disqus comments checked: they load on posts
+- [x] Front-end update: Bootstrap 5.3.8, Font Awesome 7.3.1, highlight.js 11.11.2; jQuery removed; same look
+- [x] Fix tag and category pages scrolling sideways on phones

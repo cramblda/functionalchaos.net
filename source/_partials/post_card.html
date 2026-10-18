@@ -1,0 +1,19 @@
+{# A post summary card: label line, title, date and (from tablet width up) a thumbnail on the right.
+   Used by the post archive, tag and category pages, and the next/previous links on posts.
+   Params: post, labels (list shown above the title, e.g. ['Next'] or the post's categories). #}
+<div class="row post-nav-container">
+    <div class="col-12 col-md-7 col-xl-8 post-nav-data">
+        <div class="post-nav-head">
+            {% for label in labels %}{{ label }}{% if not loop.last %} &nbsp; / &nbsp; {% endif %}{% endfor %}
+        </div>
+        <div class="post-nav-title">
+            <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+        </div>
+        <div class="post-nav-byline">{{ post.date|date('F j, Y') }}</div>
+    </div>
+    <div class="col-md-5 col-xl-4 d-none d-md-block post-nav-thumb">
+        {% if post.image.url %}
+            <a href="{{ post.url }}"><img class="float-end" src="{{ thumbnail(post.image.url, 244, 160, true) }}" alt=""></a>
+        {% endif %}
+    </div>
+</div>

@@ -24,60 +24,10 @@ use:
 
   <div class="post-nav">
   {% for post in page.pagination.items %}
-
-      <div class="col-md-12 post-nav-container">
-          <div class="col-xs-8 post-nav-data">
-              <div class="row">
-                  <div class="col-xs-12 post-nav-head">
-                      {% for category in post.categories %}
-                          {{ category }}{% if not loop.last %} &nbsp; / &nbsp; {% endif %}
-                      {% endfor %}
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-xs-12 post-nav-title">
-                      <a class="next" href="{{ post.url }}" title="{{ post.title }}">
-                          {{ post.title }}
-                      </a>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-xs-12 post-nav-byline">
-                      {{ post.date|date('F j, Y') }}
-                  </div>
-              </div>
-          </div>
-          <div class="col-xs-4 post-nav-thumb">
-              {% if post.image.url %}
-                  <a href="{{ post.url }}"><img src="{{
-                      thumbnail(
-                          post.image.url,
-                          244,
-                          160,
-                          true
-                      ) }}" alt="">
-                  </a>
-              {% endif %}
-          </div>
-      </div>
+      {% include 'post_card.html' with { post: post, labels: post.categories } %}
   {% endfor %}
   </div>
 
-  {% if page.pagination.previous_page or page.pagination.next_page %}
-      <nav class="post-nav">
-          <div class="row">
-              <div class="col-xs-6 text-left">
-                  {% if page.pagination.previous_page %}
-                      <a class="btn btn-default" href="{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>
-                  {% endif %}
-              </div>
-              <div class="col-xs-6 text-right">
-                  {% if page.pagination.next_page %}
-                      <a class="btn btn-default" href="{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>
-                  {% endif %}
-              </div>
-          </div>
-      </nav>
-  {% endif %}
+  {% include 'pagination.html' %}
 
 {% endblock content %}

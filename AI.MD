@@ -63,13 +63,40 @@ docker compose -f docker-compose-prod.yaml up --build # prod image preview at ht
 | `app/config/sculpin_kernel.yml` | Post permalinks: `blog/:year/:month/:day/:filename/` |
 | `app/SculpinKernel.php` | Registers the Icelus bundle (the `thumbnail()` Twig function → `_thumbs/`; uses Imagick, else GD) |
 | `source/_layouts/` | `base` → `default` (sidebar, Instagram, footer) → `page` |
-| `source/_views/post.html` | Post template: OG tags, FB share, Disqus, prev/next nav |
+| `source/_views/post.html` | Post template: OG tags, share buttons, Disqus, prev/next nav |
+| `source/_partials/` | `post_card.html` (summary card used by the archive, tag, category and post next/prev lists) and `pagination.html` (Newer/Older buttons) |
 | `source/_posts/` | Posts. Two are skeleton-era drafts (2012, 2013); two are real (2017 new blog, 2017 Mt Hood) |
 | `source/index.html`, `blog.html` | Home (paginated, 3 per page, uses `---more---` excerpts) and the post archive |
 | `source/blog/{tags,categories}/` | Tag and category index generators |
-| `source/components/highlightjs/` | Old vendored highlight.js, committed in f381490 (~120 files) |
 | `source/images/site/david-cramblett.jpg` | Sidebar profile photo, 400×400 shown at 200px (see "Profile photo" below) |
-| `source/js/` | `instafeed.min.js` + `instagram-feed.js` (token from instant-tokens.com) |
+| `source/js/` | `navbar.js` (mobile menu toggle), `instafeed.min.js` + `instagram-feed.js` (token from instant-tokens.com) |
+
+## Front-end stack (since 2026-10-18)
+
+All from cdnjs with SRI `integrity` hashes, loaded in `base.html` (highlight.js JS in `default.html`):
+
+- **Bootstrap 5.3.8**, CSS only. There is **no jQuery and no Bootstrap JS**: the mobile menu toggle is
+  `source/js/navbar.js` (about 10 lines, toggles `.show` on `#navbar`).
+- **Font Awesome 7.3.1** (`fa-brands` / `fa-solid`). FA7 icons are fixed-width (1.25em) by default, so
+  inline icons use `fa-width-auto`. The X icon is `fa-brands fa-x-twitter`.
+- **highlight.js 11.11.2**, GitHub theme, `hljs.highlightAll()`. The 2017 vendored copy in
+  `source/components/` (with its own package.json) was deleted.
+- To update a library: bump the version in the URL **and** replace the `integrity` hash. Get both from
+  `https://api.cdnjs.com/libraries/<name>?fields=version,sri`. With a wrong hash the browser refuses to
+  load the file.
+
+**Keeping the Bootstrap 3 look.** The top of `style.css` restores BS3's 14px Helvetica typography, heading
+sizes, links underlined only on hover, 750/970/1170 containers, 30px gutters, gray `pre`/pink `code`, the
+navbar-default look, and `.btn-default` / `.img-responsive` (BS5 dropped both; posts still use
+`{.img-responsive}`). Gotchas:
+- Breakpoint names shifted: BS3 `xs/sm/md/lg` = BS5 `(none)/md/lg/xl`, so BS3 `col-md-8` is BS5 `col-lg-8`.
+- In BS5, *every* child of `.row` gets gutter padding, and columns get none outside a `.row`.
+- BS5 utilities (`text-end`, `d-none`, …) use `!important`, so use responsive utilities
+  (`text-center text-md-end`) instead of custom overrides.
+- Verified 2026-10-18 by screenshot comparison (puppeteer at 1440/800/390px, 9 pages): desktop and tablet
+  are within about 0.4% of the BS3 site. Intentional differences: highlight.js's newer GitHub colors,
+  code wrapping at word boundaries on phones, and tag/category cards hiding the thumbnail on phones
+  (previously 111px of sideways overflow).
 
 ## Profile photo
 
@@ -140,8 +167,6 @@ magick ~/Pictures/<2025-headshot>.jpg \
   viewers whose browser allows third-party cookies, and its syndication endpoint returned 429. David
   doesn't really use X. Kept: the X profile icon in the sidebar, and the post share button, which now goes
   to `x.com/intent/post?url=…&text=…`.
-- The sidebar X icon is an inline SVG (`i.fa-x-logo`, Simple Icons path, CC0), because Font Awesome 4.7
-  has no X logo. Replace it with FA6's `fa-x-twitter` when Font Awesome is upgraded.
 - **Facebook share** (fixed 2026-10-17): the dead FB JS SDK v2.11 + `FB.ui` share (which also passed a
   relative URL) was replaced with a plain `facebook.com/sharer/sharer.php?u=…` link. No SDK and no app ID,
   so `facebook.appid` was removed from `sculpin_site.yml`.
@@ -162,7 +187,6 @@ magick ~/Pictures/<2025-headshot>.jpg \
 - Not bugs: the Mt Hood post's header is `2012-12-14-a-draft-post.jpg`, which is David's Palmer lift photo,
   shared with the sample draft. The draft posts (2012 sample, 2013 syntax highlighting) are **intentional**
   samples for checking layout in dev. Drafts are skipped in prod builds, so don't delete them.
-- Old front-end libraries from CDNs: Bootstrap 3.3.7, jQuery 3.2.1 (has known XSS CVEs), Font Awesome 4.7.
 
 ## Decisions log
 

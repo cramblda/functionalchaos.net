@@ -9,8 +9,9 @@
         {% block head_meta %}
             <meta name="robots" content="index, follow">
         {% endblock %}
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" rel="stylesheet" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.2/styles/github.min.css" rel="stylesheet" integrity="sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="/css/style.css" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 
@@ -33,12 +34,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
 
-        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
         <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="{{ site.title }} activity feed" />
-        <style>
-        /** quick fix because bootstrap <pre> has a background-color. */
-        pre code { background-color: inherit; }
-        </style>
         {% block head_styles %}
         {% endblock head_styles%}
         {% block head_scripts %}
@@ -46,22 +42,17 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar navbar-expand-md fixed-top">
                 <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/">{{ site.title }}</a>
-                    </div>
+                    <a class="navbar-brand" href="/">{{ site.title }}</a>
+                    <button type="button" class="navbar-toggler collapsed" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav text-uppercase">
-                        <li><a href="/">Home</a></li>
-                            <li><a href="/blog">Posts</a></li>
-                            <li><a href="/about">About</a></li>
+                        <ul class="navbar-nav text-uppercase">
+                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/blog/">Posts</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +62,7 @@
         <div class="mainContent container">
             <div class="row">
 
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     {% block content_wrapper %}
                         {% block content %}
                         {% endblock content%}
@@ -79,7 +70,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     {% block sidebar %}
                     {% endblock sidebar %}
                 </div>
@@ -92,29 +83,28 @@
 
         <div class="footer">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-lg-4">
                 {% block footer_left %}
                 {% endblock footer_left %}
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                 {% block footer_middle %}
                 {% endblock footer_middle %}
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                 {% block footer_right %}
                 {% endblock footer_right %}
                 </div>
             </div>
         </div>
         <footer>
-            <div class="row text-center">
+            <div class="text-center">
                 &copy; {{ "now"|date("Y") }} {{ site.title }}
             </div>
         </footer>
 
         {% block scripts %}
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="/js/navbar.js"></script>
         {% endblock scripts%}
 
         {% block scripts_after %}

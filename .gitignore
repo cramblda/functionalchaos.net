@@ -2,6 +2,5 @@
 /app/cache/*
 /app/logs/*
 /output_*/
-#/source/components/
 /vendor
 /.memsearch/

@@ -16,12 +16,11 @@
             an administrator in information technology.
         </div>
         <div class="author-social">
-            <a href="https://www.facebook.com/david.cramblett" target="_blank"><i class="fa fa-facebook"></i></a>
-            {# Font Awesome 4.7 has no X logo, so this is an inline SVG (Simple Icons, CC0) until FA is upgraded. #}
-            <a href="https://x.com/FunctionalChaos" target="_blank" aria-label="X"><i class="fa fa-x-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></i></a>
-            <a href="https://www.instagram.com/david.cramblett" target="_blank"><i class="fa fa-instagram"></i></a>
-            <a href="https://github.com/cramblda" target="_blank"><i class="fa fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/david-m-cramblett" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/david.cramblett" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://x.com/FunctionalChaos" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/david.cramblett" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://github.com/cramblda" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/david-m-cramblett" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
     </div>
     {% endblock sidebar_author %}
@@ -50,15 +49,12 @@
     {% if site.instagram.token_url %}
         {# Hidden until photos render (js/instagram-feed.js), so a dead token doesn't leave an empty banner. #}
         <div id="instagram-section" style="display: none;">
-            <div class="row">
-                <div class="instafeed-banner text-uppercase text-center">
-                    Latest from <i class="fa fa-instagram"></i> Instagram
-                </div>
+            <div class="instafeed-banner text-uppercase text-center">
+                Latest from <i class="fa-brands fa-instagram fa-width-auto"></i> Instagram
             </div>
 
-            <div class="row">
-                <div id="instafeed">
-                </div>
+            {# Tiles (col-4 col-lg-2) are rendered into this row by js/instagram-feed.js. #}
+            <div id="instafeed" class="row">
             </div>
         </div>
     {% endif %}
@@ -67,7 +63,7 @@
 
 
 {% block footer_left %}
-    <h3 class="widget-title text-left">About Me</h3>
+    <h3 class="widget-title text-start">About Me</h3>
     <div class="footer-about-me">
         David is an avid outdoor adventurer and technology
         professional living in Vancouver, WA. Currently
@@ -78,7 +74,7 @@
 
 
 {% block footer_middle %}
-    <h3 class="widget-title text-left">Tags</h3>
+    <h3 class="widget-title text-start">Tags</h3>
     <div class="post-tags post-tags-widget">
         <ul>
         {% for tag,posts in data.posts_tags %}
@@ -90,11 +86,11 @@
 
 
 {% block footer_right %}
-    <h3 class="widget-title text-left">Archived Pages</h3>
+    <h3 class="widget-title text-start">Archived Pages</h3>
     <div class="footer-archive">
         <ul>
-            <li><a href="//functionalchaos.net/photos/www/"><i class="fa fa-camera"></i> Original Photo Gallery</a></li>
-            <li><a href="//functionalchaos.net/pe7700/"><i class="fa fa-wrench"></i> BenQ PE7700 Projector Repair</a></li>
+            <li><a href="//functionalchaos.net/photos/www/"><i class="fa-solid fa-camera fa-width-auto"></i> Original Photo Gallery</a></li>
+            <li><a href="//functionalchaos.net/pe7700/"><i class="fa-solid fa-wrench fa-width-auto"></i> BenQ PE7700 Projector Repair</a></li>
         </ul>
     </div>
  {% endblock footer_right %}
@@ -102,8 +98,8 @@
 
 {% block scripts %}
     {{ parent() }}
-    <script src="/components/highlightjs/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.2/highlight.min.js" integrity="sha512-VSPLUv/n1Bmn+4zoxBNwpuFAO3//79I0Aax/qHDx24R47vylPcc9PrHDCqlePwHnh3joiM7/YTQhcXyQAAxvPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>hljs.highlightAll();</script>
     {% if site.instagram.token_url %}
         <script src="{{ site.instagram.token_url }}"></script>
         <script src="/js/instafeed.min.js"></script>

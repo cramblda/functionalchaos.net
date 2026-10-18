@@ -66,12 +66,12 @@
         {% endif %}
         <hr class="post">
         <div class="row">
-            <div class="col-sm-6 post-byline text-xs-center">
+            <div class="col-md-6 post-byline text-center text-md-start">
                 By {{ page.author|default('Anonymous') }} On {{ page.date|date('F jS, Y') }}
             </div>
-            <div class="col-sm-6 post-share text-right text-xs-center">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (site.url ~ page.url)|url_encode }}" target="_blank" rel="noopener" title="Share on Facebook" aria-label="Share on Facebook"><i class="fa fa-facebook"></i></a>
-                <a href="https://x.com/intent/post?url={{ (site.url ~ page.url)|url_encode }}&amp;text={{ page.title|url_encode }}" target="_blank" rel="noopener" title="Share on X" aria-label="Share on X"><i class="fa fa-x-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></i></a>
+            <div class="col-md-6 post-share text-center text-md-end">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (site.url ~ page.url)|url_encode }}" target="_blank" rel="noopener" title="Share on Facebook" aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://x.com/intent/post?url={{ (site.url ~ page.url)|url_encode }}&amp;text={{ page.title|url_encode }}" target="_blank" rel="noopener" title="Share on X" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
             </div>
         </div>
 
@@ -111,76 +111,12 @@
 
     {% if page.previous_post or page.next_post %}
         <div class="post-nav">
-
-
             {% if page.next_post %}
-            <div class="col-md-12 post-nav-container">
-                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12 post-nav-data">
-                    <div class="row">
-                        <div class="col-xs-12 post-nav-head">Next</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 post-nav-title">
-                            <a class="next" href="{{ page.next_post.url }}" title="{{ page.next_post.title }}">
-                                {{ page.next_post.title }}
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 post-nav-byline">
-                            {{ page.next_post.date|date('F j, Y') }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-5 hidden-xs post-nav-thumb">
-                    {% if page.next_post.image.url %}
-                        <a href="{{ page.next_post.url }}"><img class="pull-right" src="{{
-                            thumbnail(
-                                page.next_post.image.url,
-                                244,
-                                160,
-                                true
-                            ) }}" alt="">
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
+                {% include 'post_card.html' with { post: page.next_post, labels: ['Next'] } %}
             {% endif %}
-
             {% if page.previous_post %}
-            <div class="col-md-12 post-nav-container">
-                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12 post-nav-data">
-                    <div class="row">
-                        <div class="col-xs-12 post-nav-head">Previous</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 post-nav-title">
-                            <a class="next" href="{{ page.previous_post.url }}" title="{{ page.previous_post.title }}">
-                                {{ page.previous_post.title }}
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 post-nav-byline">
-                            {{ page.previous_post.date|date('F j, Y') }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-5 hidden-xs post-nav-thumb">
-                    {% if page.previous_post.image.url %}
-                        <a href="{{ page.previous_post.url }}"><img class="pull-right" src="{{
-                            thumbnail(
-                                page.previous_post.image.url,
-                                244,
-                                160,
-                                true
-                            ) }}" alt="">
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
+                {% include 'post_card.html' with { post: page.previous_post, labels: ['Previous'] } %}
             {% endif %}
-
         </div>
     {% endif %}
 

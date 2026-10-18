@@ -1,0 +1,17 @@
+{# Newer/Older buttons for paginated lists (home, post archive, tag and category pages). #}
+{% if page.pagination.previous_page or page.pagination.next_page %}
+    <nav class="post-nav">
+        <div class="row">
+            <div class="col-6 text-start">
+                {% if page.pagination.previous_page %}
+                    <a class="btn btn-default" href="{{ page.pagination.previous_page.url }}"><i class="fa-solid fa-circle-arrow-left fa-width-auto"></i> Newer Posts</a>
+                {% endif %}
+            </div>
+            <div class="col-6 text-end">
+                {% if page.pagination.next_page %}
+                    <a class="btn btn-default" href="{{ page.pagination.next_page.url }}">Older Posts <i class="fa-solid fa-circle-arrow-right fa-width-auto"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endif %}

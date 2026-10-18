@@ -1,3 +1,151 @@
+/* ---------------------------------------------------------------------------------------------------------
+   Bootstrap 3 look on Bootstrap 5.
+   The site was designed on Bootstrap 3. These rules restore its typography, container widths and gutters so the
+   design looks the same on Bootstrap 5. Breakpoint names moved: BS3 sm/md/lg (768/992/1200) = BS5 md/lg/xl.
+   --------------------------------------------------------------------------------------------------------- */
+:root {
+    --bs-body-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --bs-body-font-size: 14px;
+    --bs-body-line-height: 1.42857143;
+    --bs-body-color: #333;
+}
+
+.container, .row {
+    --bs-gutter-x: 30px;
+}
+
+/* BS3 containers: fluid below 768px, then fixed 750 / 970 / 1170. */
+@media (min-width: 576px)  { .container { max-width: none; } }
+@media (min-width: 768px)  { .container { max-width: 750px; } }
+@media (min-width: 992px)  { .container { max-width: 970px; } }
+@media (min-width: 1200px) { .container { max-width: 1170px; } }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+h1, h2, h3 { margin-top: 20px; }
+h4, h5, h6 { margin-top: 10px; }
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 18px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
+
+p { margin: 0 0 10px; }
+ul, ol { margin-top: 0; margin-bottom: 10px; padding-left: 40px; }
+
+a { text-decoration: none; }
+a:hover, a:focus { text-decoration: underline; }
+
+hr {
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+    opacity: 1;
+}
+
+/* BS3 code styles: gray, bordered <pre> blocks and pink inline <code>. */
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+}
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+}
+/* highlight.js 11's GitHub theme uses a white, 1em-padded box; keep the old light-gray one. */
+pre code.hljs {
+    padding: 0.5em;
+    background: #f8f8f8;
+}
+
+/* BS3 classes that BS5 dropped, still used by posts and templates. */
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.btn-default {
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.btn-default:hover, .btn-default:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    text-decoration: none;
+}
+
+/* BS3 "navbar-default" look: 50px bar, gray links, light bottom border. */
+nav.navbar .navbar-brand {
+    margin-right: 0;
+    padding: 15px 15px 15px 0;
+    font-size: 18px;
+    line-height: 20px;
+    color: #777;
+}
+nav.navbar {
+    --bs-navbar-nav-link-padding-x: 15px;
+}
+nav.navbar .nav-link {
+    padding: 15px;
+    line-height: 20px;
+    color: #777;
+}
+nav.navbar .navbar-toggler {
+    padding: 9px 10px;
+    border-color: #ddd;
+    border-radius: 4px;
+}
+nav.navbar .navbar-toggler:focus {
+    box-shadow: none;
+}
+nav.navbar .navbar-toggler-icon {
+    width: 22px;
+    height: 16px;
+}
+nav.navbar .navbar-toggler:not(.collapsed) {
+    background-color: #ddd;
+}
+@media (max-width: 767px) {
+    nav.navbar .navbar-collapse {
+        margin: 0 -15px;
+        padding: 7.5px 15px 0;
+        border-top: 1px solid #e7e7e7;
+    }
+    nav.navbar .nav-link {
+        padding: 10px 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
 
 body {
     padding-top: 110px;
@@ -22,6 +170,7 @@ nav.navbar a:hover {
 nav.navbar {
     background-color: #fff;
     padding: 10px 0;
+    border-bottom: 1px solid #e7e7e7;
 }
 
 nav.post-nav {
@@ -37,8 +186,7 @@ div.row {
     margin: 0;
 }
 
-.mainContent, footer.container {
-    max-width: 1200px;
+.mainContent {
     min-height: 600px;
 }
 
@@ -94,14 +242,6 @@ div.author-social i:hover
     border: 1px solid #00acdf;
     color: #fff;
     background-color: #00acdf;
-}
-
-/* Inline SVG X logo, sized to match the Font Awesome glyphs. */
-i.fa-x-logo svg {
-    width: 13px;
-    height: 13px;
-    fill: currentColor;
-    vertical-align: -1px;
 }
 
 div.content-header {
@@ -289,9 +429,14 @@ div.post-share i:hover
 div.post-nav-container {
     height: 160px;
     margin-bottom: 20px;
-    padding-right: 0;
+    padding-left: 15px;
     background-color: #fff;
     border-left: 3px solid #00acdf;
+}
+
+div.post-nav-data {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 div.post-nav-head {
@@ -330,11 +475,6 @@ div.disqus-block {
     padding: 10px;
 }
 
-div.twitter-feed {
-    margin-bottom: 30px;
-    padding: 20px;
-}
-
 div.instafeed-banner {
     padding: 20px 0;
     background-color: #fff;
@@ -343,8 +483,12 @@ div.instafeed-banner {
     letter-spacing: 0.5px;
 }
 
+#instafeed {
+    margin: 0;
+}
+
 div.instafeed-col {
-  padding: 0;
+    padding: 0;
 }
 
 /* Instagram allows portrait (4:5, 3:4) and landscape posts: crop every tile to a centered square. */
@@ -404,10 +548,3 @@ div.footer-archive a {
 div.footer-archive i {
     padding-right: 3px;
 }
-
-
-@media (max-width: 767px) {
-      .text-xs-center {
-              text-align: center;
-       }
-    }
