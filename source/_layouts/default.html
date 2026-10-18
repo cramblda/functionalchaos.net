@@ -102,7 +102,7 @@
     <script>hljs.highlightAll();</script>
     {% if site.instagram.token_url %}
         <script src="{{ site.instagram.token_url }}"></script>
-        <script src="/js/instafeed.min.js"></script>
-        <script src="/js/instagram-feed.js"></script>
+        <script src="/js/instafeed.min.js?v={{ site.calculated_date|date('U') }}"></script>
+        <script src="/js/instagram-feed.js?v={{ site.calculated_date|date('U') }}"></script>
     {% endif %}
 {% endblock scripts%}

@@ -29,7 +29,7 @@ It was started in May 2017 from the Sculpin blog skeleton. Most posts and conten
 - `bin/deploy.sh prod`: build → tag → push to Harbor (`registry.functionalchaos.net`) → bump the image tag
   in `.k8s/fc-prod-nginx-deployment.yaml` → apply → wait for the rollout. **The manifest's image tag is the
   version source of truth.** Prod needs a clean master and a typed confirmation, so David runs it.
-- Current deployed version: **v0.1.2**.
+- Current deployed version: **v1.1.0** (2026-10-18: Sculpin 4 alpha, Bootstrap 5 / FA7 / highlight.js 11).
 - `photos/` (~6.4 GB, includes an old PHP gallery) and `pe7700/` are **not in git**. They live on the
   `fc-content` Longhorn volume (RWO) mounted at `/srv/content`. README has the one-time load steps.
 - Cluster-level pieces (pull secret, Gateway listeners, TLS cert) belong to `~/projects/fc-k8s-cluster`.
@@ -97,6 +97,12 @@ navbar-default look, and `.btn-default` / `.img-responsive` (BS5 dropped both; p
   are within about 0.4% of the BS3 site. Intentional differences: highlight.js's newer GitHub colors,
   code wrapping at word boundaries on phones, and tag/category cards hiding the thumbnail on phones
   (previously 111px of sideways overflow).
+
+**Caching (since 2026-10-18).** nginx serves CSS/JS/images with `expires 7d`, so local CSS/JS links carry
+`?v={{ site.calculated_date|date('U') }}` (the build time, which changes every build). HTML (and the feed and
+sitemap) get `Cache-Control: no-cache`, so browsers revalidate via ETag and pick up new stamps right
+away. Before this, returning visitors kept the old `style.css` after the v1.1.0 deploy. **Any new local
+CSS/JS link needs the same `?v=` stamp.**
 
 ## Profile photo
 

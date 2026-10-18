@@ -2,12 +2,7 @@
 
 ## In-Progress
 
-- [ ] Switch `www` DNS record to Cloudflare-proxied (uncommitted change in `.k8s/fc-prod-nginx-deployment.yaml`)
-- [ ] Sculpin 4.0 alpha upgrade: done and tested locally in Docker. Waiting on David to commit and deploy
-
 - [ ] Confirm Dependabot alert #14 (high) closes on its own: it should be from the old dev-branch `composer.lock`, and the new lock has no advisories
-
-
 - [ ] Instant Tokens says "Token Needs Attention" (token still valid). Waiting 24h to see if it clears on its own; reconnect only if it doesn't. Don't use "refresh secret": it changes the script URL
 
 ## Backlog
@@ -24,6 +19,8 @@
 - [x] Move hosting to the home k8s cluster (Docker + k8s + `bin/deploy.sh`), deployed v0.1.1
 - [x] Fix the :8080 redirect issue, deployed v0.1.2
 - [x] Create AI.MD and TODO.MD
+- [x] Switch `www` DNS record to Cloudflare-proxied
+- [x] Deployed: Sculpin 4 + fixes, then front-end update as v1.1.0 (2026-10-18)
 - [x] Upgrade to Sculpin 4.0.0-alpha3 + Icelus 4.0.0-alpha2; Docker image now PHP 8.5 + Imagick
 - [x] Move every dependency off dev branches to tagged releases
 - [x] Clean up `composer.json` (project name, author, removed dead scripts)
@@ -51,3 +48,4 @@
 - [x] Disqus comments checked: they load on posts
 - [x] Front-end update: Bootstrap 5.3.8, Font Awesome 7.3.1, highlight.js 11.11.2; jQuery removed; same look
 - [x] Fix tag and category pages scrolling sideways on phones
+- [x] Cache-busting: deploys show up right away for returning visitors (no stale CSS after a deploy)
