@@ -33,7 +33,7 @@ use:
               </div>
               <div class="row">
                   <div class="col-xs-12 post-nav-title">
-                      <a class="next" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">
+                      <a class="next" href="{{ post.url }}" title="{{ post.title }}">
                           {{ post.title }}
                       </a>
                   </div>
@@ -65,12 +65,12 @@ use:
           <div class="row">
               <div class="col-xs-6 text-left">
                   {% if page.pagination.previous_page %}
-                      <a class="btn btn-default" href="{{ site.url }}{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>
+                      <a class="btn btn-default" href="{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>
                   {% endif %}
               </div>
               <div class="col-xs-6 text-right">
                   {% if page.pagination.next_page %}
-                      <a class="btn btn-default" href="{{ site.url }}{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>
+                      <a class="btn btn-default" href="{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>
                   {% endif %}
               </div>
           </div>

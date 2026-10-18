@@ -16,9 +16,10 @@
         }
     ],
     "require": {
-	  "sculpin/sculpin": "~3.0",
-        "beryllium/icelus": "^1.1"
+	  "sculpin/sculpin": "dev-main as 4.0.x-dev",
+      "beryllium/icelus": "^2"
     },
+    "minimum-stability": "dev",
     "scripts": {
         "publish": [
             "./publish.sh"

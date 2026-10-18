@@ -15,7 +15,7 @@ use:
         <article>
             {% if post.image.url %}
                 <div class="post-image">
-                    <a href="{{ site.url }}{{ post.url }}"><img src="{{
+                    <a href="{{ post.url }}"><img src="{{
                         thumbnail(
                             post.image.url,
                             post.image.width|default(742),
@@ -30,7 +30,7 @@ use:
                 {% if post.categories %}
                     <h6 class="text-uppercase">
                     {% for category in post.categories %}
-                        <a href="{{ site.url }}/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a>{% if not loop.last %} &nbsp; / &nbsp; {% endif %}
+                        <a href="/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a>{% if not loop.last %} &nbsp; / &nbsp; {% endif %}
                     {% endfor %}
                     </h6>
                 {% endif %}
@@ -44,11 +44,11 @@ use:
 
                 {% if break_array|length > 1 %}
                     <div class="post-readmore text-center">
-                        <a href="{{ site.url }}{{ post.url }}">Read more</a>
+                        <a href="{{ post.url }}">Read more</a>
                     </div>
                 {% else %}
                     <div class="post-readmore text-center">
-                        <a href="{{ site.url }}{{ post.url }}">View Post</a>
+                        <a href="{{ post.url }}">View Post</a>
                     </div>
                 {% endif %}
 
@@ -66,10 +66,10 @@ use:
         <nav class="post-nav">
             <div class="row">
                 <div class="col-xs-6 text-left">
-                    {% if page.pagination.previous_page %}<a class="btn btn-default" href="{{ site.url }}{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>{% endif %}<br />
+                    {% if page.pagination.previous_page %}<a class="btn btn-default" href="{{ page.pagination.previous_page.url }}"><i class="fa fa-arrow-circle-left"></i> Newer Posts</a>{% endif %}<br />
                 </div>
                 <div class="col-xs-6 text-right">
-                    {% if page.pagination.next_page %}<a class="btn btn-default" href="{{ site.url }}{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>{% endif %}<br />
+                    {% if page.pagination.next_page %}<a class="btn btn-default" href="{{ page.pagination.next_page.url }}">Older Posts <i class="fa fa-arrow-circle-right"></i></a>{% endif %}<br />
                 </div>
             </div>
         </nav>

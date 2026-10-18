@@ -1,0 +1,29 @@
+# What NOT to send into the image build.
+#
+# ⚠️ Do NOT add app/config/sculpin_site.yml or sculpin_kernel.yml: they're gitignored but the build
+# needs them.
+
+# Local state and tooling
+.git
+.github
+.idea
+.vscode
+**/.DS_Store
+.claude
+.memsearch
+
+# Built inside the image, never copied in
+vendor
+output_*
+.sculpin
+app/cache
+app/logs
+
+# Not needed in the image
+.k8s
+bin
+README.md
+s3.conf
+s3.conf.dist
+s3-publish.sh
+publish.sh

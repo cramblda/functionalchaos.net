@@ -1,0 +1,155 @@
+# functionalchaos.net on the FC home cluster (kctl-fc).
+#
+# Owned here: this site's objects in the shared `functionalchaos` namespace (Deployment, Service, content volume,
+# HTTPRoute, SecurityPolicy). Owned by the cluster repo (~/projects/fc-k8s-cluster): the
+# `harbor-pull-secret` pull secret, and the Gateway listeners + TLS certificate for these hostnames.
+#
+# The image tag below is bumped by bin/deploy.sh. It is the version source of truth.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fc-prod-nginx-deployment
+  namespace: functionalchaos
+  labels:
+    app: fc-prod
+    name: fc-prod-nginx-deployment
+spec:
+  replicas: 1
+  # The content volume is ReadWriteOnce, so the old pod must release it before the new one starts.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: fc-prod
+      name: fc-prod-nginx
+  template:
+    metadata:
+      labels:
+        app: fc-prod
+        name: fc-prod-nginx
+    spec:
+      # uid/gid 101 is `nginx` in the nginxinc/nginx-unprivileged image.
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+        fsGroup: 101
+        # Only re-own the content volume if its top level is wrong, not every file on every start.
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: fc-prod-nginx
+        image: registry.functionalchaos.net/functionalchaos/fc-prod-nginx:v0.1.0
+        ports:
+        - name: http
+          containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: ["ALL"]
+        volumeMounts:
+        - name: content
+          mountPath: /srv/content
+          readOnly: true
+        - name: tmp # nginx-unprivileged keeps its pid and temp files in /tmp
+          mountPath: /tmp
+      volumes:
+      - name: content
+        persistentVolumeClaim:
+          claimName: fc-content
+      - name: tmp
+        emptyDir: {}
+      imagePullSecrets:
+      - name: harbor-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fc-prod-nginx
+  namespace: functionalchaos
+  labels:
+    app: fc-prod
+    name: fc-prod-nginx
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  selector:
+    name: fc-prod-nginx
+---
+# Content kept outside git (photos/ ~6.4 GB, pe7700/). Loaded once from w5; see README.md.
+# Longhorn volumes can grow but never shrink.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fc-content
+  namespace: functionalchaos
+spec:
+  storageClassName: longhorn
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 10Gi
+---
+# DNS is not managed by ExternalDNS here: the apex record is pfSense DDNS and www is a
+# Cloudflare-proxied record, both maintained outside the cluster.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: fc-prod
+  namespace: functionalchaos
+  labels:
+    ignore-external-dns: "true"
+spec:
+  parentRefs:
+  - name: main-gateway
+    namespace: default
+    sectionName: functionalchaos-https # must match the Gateway listener names
+  - name: main-gateway
+    namespace: default
+    sectionName: functionalchaos-www-https
+  hostnames:
+  - "functionalchaos.net"
+  - "www.functionalchaos.net"
+  rules:
+  # ⚠️ Keep the timeout on every rule: Envoy Gateway's default is 15s.
+  - timeouts:
+      request: 120s
+    backendRefs:
+    - name: fc-prod-nginx
+      port: 80
+---
+# Pre-launch: LAN / home OpenVPN / pods only. Delete this policy (here and in the cluster) to go public.
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: fc-prod-ip-allow
+  namespace: functionalchaos
+spec:
+  targetRefs:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: fc-prod
+  authorization:
+    rules:
+    - action: Allow
+      principal:
+        clientCIDRs:
+        - 10.4.2.0/24
+        - 10.4.3.0/24
+        - 10.5.0.0/16
+    defaultAction: Deny

@@ -1,0 +1,12 @@
+# Builds the prod image (bin/deploy.sh runs `docker compose -f docker-compose-prod.yaml build`).
+# Also handy for a local preview: docker compose -f docker-compose-prod.yaml up, then http://localhost:8888
+services:
+    nginx:
+        image: fc-prod-nginx
+        container_name: fc-prod-nginx
+        platform: linux/amd64
+        build:
+            context: .
+            dockerfile: .docker/nginx/Dockerfile
+        ports:
+            - 8888:8080

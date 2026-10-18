@@ -31,7 +31,7 @@
             <div class="post-category post-category-widget">
                 <ul>
                 {% for category,posts in data.posts_categories %}
-                    <li><a href="{{ site.url }}/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a></li>
+                    <li><a href="/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a></li>
                 {% endfor %}
                 </ul>
             </div>
@@ -76,7 +76,7 @@
     <div class="post-tags post-tags-widget">
         <ul>
         {% for tag,posts in data.posts_tags %}
-            <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
+            <li><a href="/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
         {% endfor %}
         </ul>
     </div>
@@ -96,8 +96,8 @@
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ site.url }}/components/highlightjs/highlight.pack.js"></script>
+    <script src="/components/highlightjs/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="{{ site.url }}/js/instafeed.min.js"></script>
-    <script src="{{ site.url }}/js/instagram-feed.js"></script>
+    <script src="/js/instafeed.min.js"></script>
+    <script src="/js/instagram-feed.js"></script>
 {% endblock scripts%}

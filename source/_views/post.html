@@ -3,12 +3,12 @@
 {% block head_meta %}
     <meta name="robots" content="index, follow">
     <!-- FB share meta tags -->
-    <meta property="og:url"         content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:url"         content="{{ page.url }}" />
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content="{{ site.title }}" />
     <meta property="og:description" content="{{ page.title }}" />
     {% if page.image.url %}
-        <meta property="og:image"       content="{{ site.url }}/{{ page.image.url }}" />
+        <meta property="og:image"       content="/{{ page.image.url }}" />
     {% endif %}
 {% endblock %}
 
@@ -31,7 +31,7 @@
             {% if page.categories %}
                 <h6 class="text-uppercase">
                 {% for category in page.categories %}
-                    <a href="{{ site.url }}/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a>{% if not loop.last %} &nbsp; / &nbsp; {% endif %}
+                    <a href="/blog/categories/{{ category|url_encode(true) }}">{{ category }}</a>{% if not loop.last %} &nbsp; / &nbsp; {% endif %}
                 {% endfor %}
                 </h6>
             {% endif %}
@@ -45,7 +45,7 @@
             <ul>
                 <li class="post-tags-label">Tags:</li>
             {% for tag in page.tags %}
-                <li><a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
+                <li><a href="/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a></li>
             {% endfor %}
             </ul>
         </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 post-nav-title">
-                            <a class="next" href="{{ site.url }}{{ page.next_post.url }}" title="{{ page.next_post.title }}">
+                            <a class="next" href="{{ page.next_post.url }}" title="{{ page.next_post.title }}">
                                 {{ page.next_post.title }}
                             </a>
                         </div>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 post-nav-title">
-                            <a class="next" href="{{ site.url }}{{ page.previous_post.url }}" title="{{ page.previous_post.title }}">
+                            <a class="next" href="{{ page.previous_post.url }}" title="{{ page.previous_post.title }}">
                                 {{ page.previous_post.title }}
                             </a>
                         </div>
@@ -195,7 +195,7 @@
           FB.ui({
             method: 'share',
             display: 'popup',
-            href: '{{ site.url }}{{ page.url }}',
+            href: '{{ page.url }}',
           }, function(response){});
         }
     </script>

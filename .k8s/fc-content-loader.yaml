@@ -1,0 +1,30 @@
+# One-time helper: a temporary pod that mounts the fc-content volume read-write so content kept outside
+# git (photos/, pe7700/) can be streamed in. See README.md § Content not in git. Delete it when done.
+#
+# The volume is ReadWriteOnce, so this pod must run on the same node as the nginx pod (required
+# podAffinity below). Deploy the site first so the volume and the nginx pod exist.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fc-content-loader
+  namespace: functionalchaos
+spec:
+  restartPolicy: Never
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            name: fc-prod-nginx
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - name: loader
+    image: docker.io/library/alpine:3
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: content
+      mountPath: /srv/content
+  volumes:
+  - name: content
+    persistentVolumeClaim:
+      claimName: fc-content
