@@ -1,7 +1,7 @@
 # functionalchaos.net on the FC home cluster (kctl-fc).
 #
 # Owned here: this site's objects in the shared `functionalchaos` namespace (Deployment, Service, content volume,
-# HTTPRoute, SecurityPolicy). Owned by the cluster repo (~/projects/fc-k8s-cluster): the
+# HTTPRoute, DNSEndpoint for www). Owned by the cluster repo (~/projects/fc-k8s-cluster): the
 # `harbor-pull-secret` pull secret, and the Gateway listeners + TLS certificate for these hostnames.
 #
 # The image tag below is bumped by bin/deploy.sh. It is the version source of truth.
@@ -105,8 +105,8 @@ spec:
     requests:
       storage: 10Gi
 ---
-# DNS is not managed by ExternalDNS here: the apex record is pfSense DDNS and www is a
-# Cloudflare-proxied record, both maintained outside the cluster.
+# Public site: no SecurityPolicy. (Admin UIs and private apps get a LAN/VPN allowlist instead.)
+# ExternalDNS ignores this route; DNS comes from the DNSEndpoint below.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -133,23 +133,18 @@ spec:
     - name: fc-prod-nginx
       port: 80
 ---
-# Pre-launch: LAN / home OpenVPN / pods only. Delete this policy (here and in the cluster) to go public.
-apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: SecurityPolicy
+# www record in Cloudflare: DNS-only CNAME to the apex, created and owned by ExternalDNS (the apex A record
+# is maintained by pfSense DDNS). Internally, www comes from the BIND zone on `files` (A → gateway), since
+# functionalchaos.net is authoritative there.
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
 metadata:
-  name: fc-prod-ip-allow
+  name: fc-prod-www
   namespace: functionalchaos
 spec:
-  targetRefs:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    name: fc-prod
-  authorization:
-    rules:
-    - action: Allow
-      principal:
-        clientCIDRs:
-        - 10.4.2.0/24
-        - 10.4.3.0/24
-        - 10.5.0.0/16
-    defaultAction: Deny
+  endpoints:
+  - dnsName: www.functionalchaos.net
+    recordType: CNAME
+    targets:
+    - functionalchaos.net
+    recordTTL: 300

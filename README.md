@@ -14,7 +14,7 @@ Served from the FC home Kubernetes cluster as an unprivileged nginx image built 
 |---|---|
 | `.docker/nginx/` | Dockerfile (Sculpin build stage + nginx) and nginx config |
 | `docker-compose-prod.yaml` | Builds the `fc-prod-nginx` image; `up` for a local preview on http://localhost:8888 |
-| `.k8s/fc-prod-nginx-deployment.yaml` | Deployment, Service, content volume, HTTPRoute, pre-launch SecurityPolicy |
+| `.k8s/fc-prod-nginx-deployment.yaml` | Deployment, Service, content volume, HTTPRoute, DNSEndpoint (www) |
 | `.k8s/fc-content-loader.yaml` | One-time helper for loading the content volume (below) |
 | `bin/deploy.sh` | Build → tag → push to Harbor → bump manifest tag → apply → wait for rollout |
 
