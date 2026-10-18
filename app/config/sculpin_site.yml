@@ -9,9 +9,6 @@ url: https://functionalchaos.net
 disqus:
     shortname: functionalchaos-net
 
-facebook:
-    appid: 431997004737458
-
 # Instagram feed (footer). token_url is the token.js script from the Instant Tokens dashboard. The userSecret in it
 # is public by design: it ends up in every page's HTML. Remove token_url to turn the feed off.
 instagram:

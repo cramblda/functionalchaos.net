@@ -24,7 +24,7 @@ SITE="functionalchaos.net"                 # for display only
 NAMESPACE="${NAMESPACE:-functionalchaos}"
 REGISTRY="registry.functionalchaos.net/functionalchaos"
 
-# kctl-fc is the home cluster. Never point this at the work clusters (kctl, kctl-new, ...).
+# kctl-fc is the home cluster. Never point this at any other cluster.
 # Full path, because ~/bin in PATH isn't expanded for every caller.
 KUBECTL="${KUBECTL:-$HOME/bin/kctl-fc}"
 
@@ -108,10 +108,10 @@ if [[ "$ENV" == "prod" && "$DRY_RUN" == false ]]; then
     [[ -z "$(git status --porcelain)" ]] || die "Working tree is not clean. Commit or stash before a prod deploy."
 fi
 
-# Fail before building if the cluster isn't reachable (work VPN up, or away from home without OpenVPN).
+# Fail before building if the cluster isn't reachable (e.g. away from home without the VPN).
 if [[ "$DRY_RUN" == false ]]; then
     "$KUBECTL" get namespace "$NAMESPACE" >/dev/null 2>&1 \
-        || die "Can't reach namespace '${NAMESPACE}' with ${KUBECTL}. Work VPN up? Home OpenVPN down?"
+        || die "Can't reach namespace '${NAMESPACE}' with ${KUBECTL}. Check your network or VPN connection."
 fi
 
 # ── Determine version ─────────────────────────────────────────────────────────

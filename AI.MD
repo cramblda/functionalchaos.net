@@ -59,7 +59,7 @@ docker compose -f docker-compose-prod.yaml up --build # prod image preview at ht
 
 | Path | What |
 |---|---|
-| `app/config/sculpin_site.yml` | `site.*` vars: title, url, disqus shortname, facebook appid |
+| `app/config/sculpin_site.yml` | `site.*` vars: title, url, disqus shortname, instagram token_url |
 | `app/config/sculpin_kernel.yml` | Post permalinks: `blog/:year/:month/:day/:filename/` |
 | `app/SculpinKernel.php` | Registers the Icelus bundle (the `thumbnail()` Twig function → `_thumbs/`; uses Imagick, else GD) |
 | `source/_layouts/` | `base` → `default` (sidebar, Instagram, footer) → `page` |
@@ -78,8 +78,10 @@ The sidebar circle uses `source/images/site/david-cramblett.jpg`, which replaced
 was made from David's 2025 headshot (1613×2016, sRGB, in `~/Pictures`) with a hand-picked square crop. A
 plain center crop cuts off the head. David approved this framing:
 
+This repo is **public**, so the source file's real name (it identifies David's employer) isn't recorded here.
+
 ```bash
-magick ~/Pictures/20251009_ortiz-nino_mesd_admin-headshots-100272-EDIT.jpg \
+magick ~/Pictures/<2025-headshot>.jpg \
   -crop 1600x1600+13+0 +repage -resize 400x400 -strip -interlace Plane -quality 85 \
   source/images/site/david-cramblett.jpg
 ```
@@ -123,6 +125,13 @@ magick ~/Pictures/20251009_ortiz-nino_mesd_admin-headshots-100272-EDIT.jpg \
   (Instagram ID `4503173559711488`, which returned "Instagram User Not Found"). Re-authorizing in the
   dashboard changes **both** the Instagram ID and the `userSecret`, so always copy the whole URL. A wrong
   secret returns 403 "Invalid User Secret".
+- Instant Tokens **domain controls** are on (2026-10-17). They match the browser's full origin, so entries
+  need a scheme (and a port for local): `https://functionalchaos.net`, `https://www.functionalchaos.net`,
+  `http://localhost:8008`. A bare `functionalchaos.net` is refused. The Docker preview on
+  `localhost:8888` isn't allowed, so its feed stays hidden unless that origin is added. Browsers that strip
+  the Referer also get no feed, which is harmless since it hides itself.
+- Instant Tokens' dashboard **"refresh secret"** rotates the `userSecret`, which breaks the script URL until
+  `sculpin_site.yml` is updated. It is *not* a token refresh, and the dashboard has no manual token refresh.
 - `sculpin generate --watch` does **not** reload `app/config/*.yml`. Restart the dev server after editing
   config.
 - Instagram tiles: Instagram allows portrait posts, so `img.instafeed` uses `aspect-ratio: 1/1` +
@@ -134,14 +143,19 @@ magick ~/Pictures/20251009_ortiz-nino_mesd_admin-headshots-100272-EDIT.jpg \
   to `x.com/intent/post?url=…&text=…`.
 - The sidebar X icon is an inline SVG (`i.fa-x-logo`, Simple Icons path, CC0), because Font Awesome 4.7
   has no X logo. Replace it with FA6's `fa-x-twitter` when Font Awesome is upgraded.
-- Still obsolete: the Facebook JS SDK v2.11 share button, the googlecode html5shim, and the UA-era Google
-  Analytics snippet (only renders if configured, and it isn't). Disqus is configured and should be kept.
+- **Facebook share** (fixed 2026-10-17): the dead FB JS SDK v2.11 + `FB.ui` share (which also passed a
+  relative URL) was replaced with a plain `facebook.com/sharer/sharer.php?u=…` link. No SDK and no app ID,
+  so `facebook.appid` was removed from `sculpin_site.yml`.
+- **Post share tags** (fixed 2026-10-17, `source/_views/post.html` `head_meta`): absolute `og:url` and
+  `og:image` (the post's header thumbnail), `og:title` = post title, and `og:description` + `description`
+  = text before `---more---` (stripped, max 200 chars). Also `og:type=article`, `article:published_time`,
+  and `twitter:card`. Check previews with Facebook's Sharing Debugger after deploys.
+- Still obsolete: the googlecode html5shim, and the UA-era Google Analytics snippet (only renders if
+  configured, and it isn't). Disqus loads (seen in a headless screenshot 2026-10-17) and should be kept.
 - Live site: `/photos/www/` and `/pe7700/` return 404. Either the content volume hasn't been loaded yet, or
   there's no `index.html` (the gallery is PHP and isn't served). Unverified.
 - `base.html` defaults `robots` to `noindex, follow`. Only posts override it, so the **home page and About
   are noindex**.
-- OG tags on posts: `og:url` and `og:image` are relative (they need to be absolute), and `og:title` is the
-  site title while `og:description` is the post title.
 - The Mt Hood post's header image is the draft post's image (`2012-12-14-a-draft-post.jpg`).
 - Old front-end libraries from CDNs: Bootstrap 3.3.7, jQuery 3.2.1 (has known XSS CVEs), Font Awesome 4.7.
 - Favicon links use `//` double slashes. `theme-color` meta appears twice.
