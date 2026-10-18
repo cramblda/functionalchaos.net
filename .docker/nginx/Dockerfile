@@ -13,7 +13,8 @@ RUN apk add --no-cache git unzip imagemagick imagemagick-jpeg \
  && docker-php-ext-enable imagick \
  && apk del .build-deps \
  && curl -sS https://getcomposer.org/installer \
-    | php -- --install-dir=/usr/local/bin --filename=composer
+    | php -- --install-dir=/usr/local/bin --filename=composer \
+ && echo 'date.timezone = America/Los_Angeles' > "$PHP_INI_DIR/conf.d/timezone.ini"
 
 WORKDIR /build
 COPY . .

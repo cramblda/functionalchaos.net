@@ -12,22 +12,8 @@
 
 ## Backlog
 
-### Sculpin & build
-- [ ] Set the build timezone to Pacific so Docker and local builds produce the same dates
-
-### Broken or outdated
-- [ ] Disqus comments: check that they still load
-- [ ] Remove the dead html5shim and old Google Analytics snippet
+### Outdated
 - [ ] Update front-end libraries (Bootstrap 3, jQuery 3.2.1, Font Awesome 4, highlight.js) without changing the look. With Font Awesome 6, switch the inline X logo to its built-in X icon
-
-### Site fixes
-- [ ] Home page and About page are set to `noindex` (hidden from search engines)
-- [ ] Mt Hood post uses the draft post's header image
-- [ ] Small template cleanup (favicon `//` paths, duplicate meta tag)
-
-### Cleanup
-- [ ] Remove `component-manager.php`
-- [ ] Remove the skeleton draft posts (2012 draft, 2013 syntax highlight)
 
 ### Content
 - [ ] Refresh bio text (About page, sidebar, footer)
@@ -59,3 +45,10 @@
 - [x] Fix link-preview tags on posts (full URLs, real title, excerpt as description, header image)
 - [x] Remove work references from `bin/deploy.sh` (repo is public)
 - [x] Instant Tokens domain controls: only functionalchaos.net, www and localhost:8008 can load the token
+- [x] Remove the dead html5shim and old Google Analytics snippet
+- [x] Small template cleanup (favicon `//` paths, duplicate theme-color tag)
+- [x] Search engines can index the home page, post archive and About (were `noindex`); added them to the sitemap
+- [x] Remove unused `component-manager.php` (2017 leftover)
+- [x] Mt Hood header image and the sample drafts checked: intentional, keeping them
+- [x] Docker build uses Pacific time, so production dates match local builds
+- [x] Disqus comments checked: they load on posts

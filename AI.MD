@@ -70,7 +70,6 @@ docker compose -f docker-compose-prod.yaml up --build # prod image preview at ht
 | `source/components/highlightjs/` | Old vendored highlight.js, committed in f381490 (~120 files) |
 | `source/images/site/david-cramblett.jpg` | Sidebar profile photo, 400×400 shown at 200px (see "Profile photo" below) |
 | `source/js/` | `instafeed.min.js` + `instagram-feed.js` (token from instant-tokens.com) |
-| `component-manager.php` | Leftover from the old Composer component-installer approach. Not wired up |
 
 ## Profile photo
 
@@ -115,8 +114,8 @@ magick ~/Pictures/<2025-headshot>.jpg \
      `destHeight * srcRatio`. The New Blog header came out 750×171 instead of 750×321.
   - The Imagick path uses native `cropThumbnailImage` / `thumbnailImage(bestfit)` and is correct, so the
     Docker image installs Imagick.
-- Timezone: the Docker build runs in UTC and local builds in Pacific, so sitemap `lastmod` offsets differ.
-  The deployed v0.1.x images were also UTC-built.
+- Timezone (fixed 2026-10-17): the Dockerfile sets PHP `date.timezone = America/Los_Angeles` to match
+  local PHP. Before that, Docker builds (including v0.1.x) used UTC, so dates carried `+00:00`.
 - **Instagram feed**: uses Instant Tokens (a paid service: $6.95/mo or $60/yr, and David has an account).
   Their `token.js` defines `InstagramToken`, and the vendored `source/js/instafeed.min.js` is their
   Instafeed v3 fork, which calls `graph.instagram.com/v21.0` (the current Instagram API; it matched their
@@ -150,15 +149,20 @@ magick ~/Pictures/<2025-headshot>.jpg \
   `og:image` (the post's header thumbnail), `og:title` = post title, and `og:description` + `description`
   = text before `---more---` (stripped, max 200 chars). Also `og:type=article`, `article:published_time`,
   and `twitter:card`. Check previews with Facebook's Sharing Debugger after deploys.
-- Still obsolete: the googlecode html5shim, and the UA-era Google Analytics snippet (only renders if
-  configured, and it isn't). Disqus loads (seen in a headless screenshot 2026-10-17) and should be kept.
+- Removed 2026-10-17: the googlecode html5shim (IE<9) and the Universal Analytics `analytics.js` snippet.
+  UA stopped processing data in 2023, and the snippet only rendered if `google_analytics_tracking_id` was
+  set, which it never was. The site has **no analytics** now. Disqus loads (seen in a headless screenshot
+  2026-10-17) and should be kept.
 - Live site: `/photos/www/` and `/pe7700/` return 404. Either the content volume hasn't been loaded yet, or
   there's no `index.html` (the gallery is PHP and isn't served). Unverified.
-- `base.html` defaults `robots` to `noindex, follow`. Only posts override it, so the **home page and About
-  are noindex**.
-- The Mt Hood post's header image is the draft post's image (`2012-12-14-a-draft-post.jpg`).
+- Robots (fixed 2026-10-17): `base.html` now defaults to `index, follow`. Before that the default was
+  `noindex`, which hid the home page and About. Tag pages, category pages and `404.html` override it with
+  `noindex`, and `robots.txt` also disallows `/blog/tags/` and `/blog/categories/`. `sitemap.xml` lists
+  the home page, `/blog/`, `/about/` and all posts.
+- Not bugs: the Mt Hood post's header is `2012-12-14-a-draft-post.jpg`, which is David's Palmer lift photo,
+  shared with the sample draft. The draft posts (2012 sample, 2013 syntax highlighting) are **intentional**
+  samples for checking layout in dev. Drafts are skipped in prod builds, so don't delete them.
 - Old front-end libraries from CDNs: Bootstrap 3.3.7, jQuery 3.2.1 (has known XSS CVEs), Font Awesome 4.7.
-- Favicon links use `//` double slashes. `theme-color` meta appears twice.
 
 ## Decisions log
 
