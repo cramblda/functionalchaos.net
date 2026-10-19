@@ -8,6 +8,8 @@
 **/.DS_Store
 .claude
 .memsearch
+# Private trip notes and original photos (bin/new-trip). Never part of the site.
+journal
 
 # Built inside the image, never copied in
 vendor

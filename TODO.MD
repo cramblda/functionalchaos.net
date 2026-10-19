@@ -7,6 +7,10 @@
 
 ## Backlog
 
+### Content
+- [ ] Finish the Mt Hood post: the second summit attempt stops mid-story ("…up to the snow above the gates")
+- [ ] Try the trip-post workflow: a short Pixel Recorder test recording on a walk, then `/trip-post`
+
 ### On hold
 - [ ] `/photos/www/` and `/pe7700/` return 404: waiting until the content is moved to the volume
 
@@ -47,3 +51,5 @@
 - [x] Cache-busting: deploys show up right away for returning visitors (no stale CSS after a deploy)
 - [x] Refresh bio text (About page, sidebar, footer): "IT leadership", MHCC teaching in past tense, LinkedIn link
 - [x] Social links checked: all correct, keeping X for now
+- [x] Trip-post workflow: `bin/new-trip`, `bin/prep-photos` (strips GPS), `/trip-post` command, private `journal/` folder
+- [x] Strip GPS and camera data from the published Mt Hood photos (lossless)

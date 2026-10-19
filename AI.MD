@@ -104,6 +104,27 @@ sitemap) get `Cache-Control: no-cache`, so browsers revalidate via ETag and pick
 away. Before this, returning visitors kept the old `style.css` after the v1.1.0 deploy. **Any new local
 CSS/JS link needs the same `?v=` stamp.**
 
+## Writing trip posts (since 2026-10-18)
+
+David's process: he talks through each day into the **Pixel Recorder** app (on-device transcription, so no
+signal is needed), keeps photos in **Google Photos**, and puts the favorites in an album when the trip ends.
+
+1. `./bin/new-trip <name>` creates `journal/<YYYY-MM>-<name>/` with `transcripts/`, `photos/` and a
+   `notes.md` template. **`journal/` is git-ignored and docker-ignored.** It holds raw notes and original photos
+   and never gets published.
+2. He drops in the Recorder transcripts (exported as .txt) and the unzipped Google Photos album download.
+3. `/trip-post <journal-folder>` (`.claude/skills/trip-post/SKILL.md`) reads everything, proposes a plan (title,
+   photos, open questions), preps the photos, and writes a `draft: true` post in his voice (reference:
+   `source/_posts/2017-12-15-mt-hood.md`). He reviews it on the dev server, then it's published.
+4. `./bin/prep-photos <post-slug> <photo>[=<name>] …` auto-orients, converts to sRGB (macOS system profile),
+   resizes to at most 1600px, strips **all** metadata, and writes progressive JPEGs to
+   `source/images/post/<slug>/`. It handles HEIC/JPEG/PNG/WebP and refuses to output a file that still has
+   metadata. Tested 2026-10-18 with GPS-tagged JPEG and HEIC files and an EXIF-rotated photo.
+
+Photo privacy: before 2026-10-18 the Mt Hood photos were published with iPhone GPS coordinates (trailhead and
+mountain). They were stripped losslessly with `jpegtran -copy none` (pixels identical). Never publish
+unprocessed originals.
+
 ## Profile photo
 
 The sidebar circle uses `source/images/site/david-cramblett.jpg`, which replaced Gravatar on 2026-10-17. It

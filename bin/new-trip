@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# new-trip: create a private journal folder for a trip, adventure or project.
+#
+# Usage:
+#   ./bin/new-trip <name>          e.g. ./bin/new-trip mt-adams   → journal/2026-11-mt-adams/
+#   ./bin/new-trip 2026-08-wy-ice  (a name that already starts with YYYY-MM is used as-is)
+#
+# journal/ is git-ignored: transcripts, notes and original photos stay on this Mac and never get published.
+# Only what /trip-post prepares (resized, metadata-stripped photos and the post itself) goes into the site.
+
+set -euo pipefail
+
+[[ $# -eq 1 ]] || { sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 1; }
+
+cd "$(dirname "$0")/.."
+
+NAME=$(echo "$1" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+[[ "$NAME" =~ ^[0-9]{4}-[0-9]{2}- ]] || NAME="$(date +%Y-%m)-$NAME"
+DIR="journal/$NAME"
+
+[[ ! -e "$DIR" ]] || { echo "Already exists: $DIR"; exit 1; }
+mkdir -p "$DIR/transcripts" "$DIR/photos"
+
+cat > "$DIR/notes.md" <<'EOF'
+# Trip notes
+
+Everything in this folder is private (git-ignored). Rough notes are fine.
+
+## Basics
+- What / where:
+- Dates:
+- Who:
+- Goal:
+
+## Anything to add or correct
+<!-- Things the transcripts missed, names spelled right, what you want the post to emphasize, anything to leave out. -->
+
+## Favorite photos
+<!-- Optional. Photo file name and a few words, e.g.  PXL_20261108_151203.jpg — summit ridge at sunrise
+     Leave empty and /trip-post will suggest picks from everything in photos/. -->
+EOF
+
+echo "Created $DIR/"
+echo
+echo "Next:"
+echo "  1. Put Pixel Recorder transcripts (exported as .txt) in  $DIR/transcripts/"
+echo "  2. Put your Google Photos album (download the zip, unzip) in  $DIR/photos/"
+echo "  3. Optionally fill in  $DIR/notes.md"
+echo "  4. In Claude Code:  /trip-post $NAME"

@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# prep-photos: make trip photos web-ready for a blog post.
+#
+# Usage:
+#   ./bin/prep-photos <post-slug> <photo>[=<name>] [<photo>[=<name>] ...]
+#
+#   <post-slug>  the post's file name without .md, e.g. 2026-11-08-mt-adams
+#   <photo>      an original from the trip journal (JPEG, HEIC, PNG, WebP; any size)
+#   =<name>      optional web name, e.g. =summit-ridge (default: the original's name, lowercased)
+#
+# Example:
+#   ./bin/prep-photos 2026-11-08-mt-adams journal/2026-11-mt-adams/photos/PXL_20261108_151203.jpg=summit-ridge
+#
+# Each photo is rotated upright, converted to sRGB, resized to at most 1600px on its long edge, and saved as a
+# progressive JPEG in source/images/post/<post-slug>/<name>.jpg with ALL metadata removed (GPS location, camera,
+# timestamps). The site and repo are public, so never publish a photo that didn't go through this.
+
+set -euo pipefail
+
+MAX_EDGE=1600
+QUALITY=82
+SRGB_PROFILE="/System/Library/ColorSync/Profiles/sRGB Profile.icc"
+
+GREEN='\033[0;32m'; RED='\033[0;31m'; NC='\033[0m'
+die() { echo -e "${RED}✖  $*${NC}" >&2; exit 1; }
+
+[[ $# -ge 2 ]] || { sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'; exit 1; }
+command -v magick >/dev/null || die "ImageMagick is required (brew install imagemagick)."
+[[ -f "$SRGB_PROFILE" ]] || die "Missing color profile: $SRGB_PROFILE"
+
+cd "$(dirname "$0")/.."
+
+SLUG=$1; shift
+[[ "$SLUG" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$ ]] || die "Post slug should look like 2026-11-08-mt-adams (got '$SLUG')."
+DEST="source/images/post/$SLUG"
+mkdir -p "$DEST"
+
+for arg in "$@"; do
+    src=${arg%%=*}
+    if [[ "$arg" == *=* ]]; then
+        name=${arg#*=}
+    else
+        name=$(basename "${src%.*}")
+    fi
+    # Web-safe file name: lowercase, letters/digits/dashes only.
+    name=$(echo "$name" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+    [[ -f "$src" ]] || die "Not found: $src"
+    [[ -n "$name" ]] || die "Empty name for $src"
+    out="$DEST/$name.jpg"
+
+    # [0] = first frame only (skips HEIC thumbnails and Ultra HDR gain maps).
+    magick "${src}[0]" -auto-orient -profile "$SRGB_PROFILE" -strip \
+        -resize "${MAX_EDGE}x${MAX_EDGE}>" -quality "$QUALITY" -sampling-factor 4:2:0 -interlace Plane \
+        "$out"
+
+    # Double-check nothing identifying survived.
+    leftover=$(magick identify -format '%[EXIF:*]%[IPTC:*]%[XMP:*]' "$out" 2>/dev/null || true)
+    [[ -z "$leftover" ]] || die "Metadata still present in $out — not safe to publish."
+
+    printf "${GREEN}✔${NC}  %-40s → %s  (%s, %s → %s)\n" "$(basename "$src")" "$out" \
+        "$(magick identify -format '%wx%h' "$out")" \
+        "$(du -h "$src" | cut -f1 | tr -d ' ')" "$(du -h "$out" | cut -f1 | tr -d ' ')"
+done
+
+echo
+echo "Use in a post:  ![Describe the photo](/images/post/$SLUG/<name>.jpg){.img-responsive}"
