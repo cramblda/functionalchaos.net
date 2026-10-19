@@ -3,13 +3,9 @@
 ## In-Progress
 
 - [ ] Confirm Dependabot alert #14 (high) closes on its own: it should be from the old dev-branch `composer.lock`, and the new lock has no advisories
-- [ ] Instant Tokens says "Token Needs Attention" (token still valid). Waiting 24h to see if it clears on its own; reconnect only if it doesn't. Don't use "refresh secret": it changes the script URL
+- [ ] Instant Tokens dashboard says "Token Needs Attention" (also flipped to "Needs subscription", though the subscription is active), but the token works (checked Oct 18). **Check on Dec 1, 2026:** if the warning is still there, reconnect, since the token expires around **Dec 16, 2026** if they never refresh it. Not critical: the feed hides itself if the token dies. Don't use "refresh secret": it changes the script URL
 
 ## Backlog
-
-### Content
-- [ ] Refresh bio text (About page, sidebar, footer)
-- [ ] Review social links
 
 ### On hold
 - [ ] `/photos/www/` and `/pe7700/` return 404: waiting until the content is moved to the volume
@@ -49,3 +45,5 @@
 - [x] Front-end update: Bootstrap 5.3.8, Font Awesome 7.3.1, highlight.js 11.11.2; jQuery removed; same look
 - [x] Fix tag and category pages scrolling sideways on phones
 - [x] Cache-busting: deploys show up right away for returning visitors (no stale CSS after a deploy)
+- [x] Refresh bio text (About page, sidebar, footer): "IT leadership", MHCC teaching in past tense, LinkedIn link
+- [x] Social links checked: all correct, keeping X for now
